@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>수납 가이드 | 터TOOL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-height:1.5;max-width:480px;margin:0 auto;min-height:100vh}
+
+.header{background:#fff;padding:20px 20px 0;position:sticky;top:0;z-index:100;border-bottom:1px solid #f0f0f0}
+.header-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.logo{width:32px;height:32px;background:#3F6B55;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo svg{width:18px;height:18px}
+.header-title{font-size:16px;font-weight:700;color:#1c1c1e}
+.header-sub{font-size:12px;color:#8e8e93;margin-top:1px}
+
+.plan-tabs{display:flex;border-bottom:1px solid #f0f0f0}
+.plan-tab{flex:1;padding:13px 0;font-size:14px;font-weight:500;color:#8e8e93;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.plan-tab.active{color:#3F6B55;font-weight:700;border-bottom-color:#3F6B55}
+
+.sub-tabs{display:flex;overflow-x:auto;scrollbar-width:none;background:#fff;border-bottom:1px solid #f0f0f0}
+.sub-tabs::-webkit-scrollbar{display:none}
+.sub-tab{flex-shrink:0;padding:11px 16px;font-size:13px;font-weight:500;color:#8e8e93;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.sub-tab.active{color:#3F6B55;font-weight:600;border-bottom-color:#3F6B55}
+
+.plan-page{display:none}
+.plan-page.active{display:block}
+.sub-page{display:none}
+.sub-page.active{display:block}
+.section{padding:20px}
+
+.sec-label{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+
+.highlight{background:#f0f7f3;border-radius:14px;padding:16px;margin-bottom:12px}
+.highlight-title{font-size:14px;font-weight:700;color:#1c1c1e;margin-bottom:10px}
+.highlight-item{font-size:13px;color:#2d5040;padding-left:14px;position:relative;line-height:1.65;margin-bottom:6px}
+.highlight-item:last-child{margin-bottom:0}
+.highlight-item::before{content:'·';position:absolute;left:0;line-height:1.3;font-size:18px;font-weight:900}
+
+.card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px}
+.card-item{padding:15px 16px;border-bottom:1px solid #f5f5f7}
+.card-item:last-child{border-bottom:none}
+.card-title{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:4px}
+.card-desc{font-size:13px;color:#6e6e73;line-height:1.65}
+.card-desc em{font-style:normal;font-weight:600;color:#3F6B55}
+
+.notice{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #e5e5ea}
+.notice-title{font-size:14px;font-weight:700;color:#1c1c1e;margin-bottom:5px}
+.notice-desc{font-size:13px;color:#6e6e73;line-height:1.65}
+
+.step-list{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px}
+.step-item{display:flex;align-items:flex-start;gap:14px;padding:15px 16px;border-bottom:1px solid #f5f5f7}
+.step-item:last-child{border-bottom:none}
+.step-num{width:26px;height:26px;border-radius:50%;background:#3F6B55;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-title{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:3px}
+.step-desc{font-size:13px;color:#6e6e73;line-height:1.55}
+.step-desc em{font-style:normal;font-weight:600;color:#3F6B55}
+
+.flow{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px}
+.flow-step{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid #f5f5f7}
+.flow-step:last-child{border-bottom:none;padding-bottom:0}
+.flow-num{width:26px;height:26px;border-radius:50%;background:#3F6B55;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.flow-name{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:2px}
+.flow-desc{font-size:13px;color:#6e6e73;line-height:1.55}
+.auto-tag{display:inline-block;background:#f0f7f3;color:#3F6B55;font-size:10px;font-weight:700;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle;letter-spacing:.2px}
+
+.calc{background:#f5f5f7;border-radius:12px;padding:14px;margin-top:10px}
+.calc-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #e5e5ea}
+.calc-row:last-child{border-bottom:none;padding-top:10px;margin-top:2px}
+.calc-label{font-size:13px;color:#6e6e73}
+.calc-value{font-size:13px;font-weight:600;color:#1c1c1e}
+.calc-total .calc-label{font-weight:700;color:#1c1c1e}
+.calc-total .calc-value{color:#3F6B55;font-size:15px}
+
+.bottom-space{height:40px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <svg viewBox="0 0 18 18" fill="none">
+        <path d="M9 2L15 5.5V12.5L9 16L3 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 7V11M7 9H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="header-title">수납 가이드</div>
+      <div class="header-sub">터TOOL 수납 메뉴 사용 방법</div>
+    </div>
+  </div>
+  <div class="plan-tabs">
+    <button class="plan-tab active" onclick="selectPlan('pro',this)">프로 플랜</button>
+    <button class="plan-tab" onclick="selectPlan('basic',this)">베이직 플랜</button>
+  </div>
+</div>
+
+<!-- 프로 플랜 -->
+<div class="plan-page active" id="plan-pro">
+  <div class="sub-tabs" id="subtabs-pro">
+    <button class="sub-tab active" onclick="selectSub('pro','overview',this)">개요</button>
+    <button class="sub-tab" onclick="selectSub('pro','flow',this)">자동화 흐름</button>
+    <button class="sub-tab" onclick="selectSub('pro','sender',this)">송금자명 등록</button>
+    <button class="sub-tab" onclick="selectSub('pro','unmatched',this)">미확인 입금</button>
+    <button class="sub-tab" onclick="selectSub('pro','manual',this)">수동 처리</button>
+    <button class="sub-tab" onclick="selectSub('pro','notice',this)">미납 알림</button>
+    <button class="sub-tab" onclick="selectSub('pro','diff',this)">차액 계산기</button>
+  </div>
+
+  <div class="sub-page active" id="pro-overview">
+    <div class="section">
+      <div class="highlight">
+        <div class="highlight-title">프로 플랜에서 자동으로 처리되는 것들</div>
+        <div class="highlight-item">입주민 입금 감지 및 수납 자동 완납 처리</div>
+        <div class="highlight-item">입금자명으로 어떤 입주민인지 자동 매칭</div>
+        <div class="highlight-item">다음 달 수납 스케줄 자동 생성</div>
+        <div class="highlight-item">미납 시 지정한 날짜에 독촉 알림 자동 발송</div>
+      </div>
+      <div class="notice">
+        <div class="notice-title">자동 수납 시작 전 필요한 설정</div>
+        <div class="notice-desc">수납 계좌 등록 — 알림번호 등록 — 입주민 송금자명 등록 순서로 설정해야 자동 수납이 정상 작동합니다.</div>
+      </div>
+      <div class="sec-label">수납 화면 구성</div>
+      <div class="card">
+        <div class="card-item">
+          <div class="card-title">월별 수납 현황 카드</div>
+          <div class="card-desc">상단 카드에서 이번 달 완납 · 미납 · 부분납 인원을 확인할 수 있습니다. 좌우 스와이프로 다른 달을 조회할 수 있어요.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">미확인 입금 카드</div>
+          <div class="card-desc">입금자명이 등록된 송금자명과 다를 경우 미확인 입금으로 분류됩니다. 직접 입주민과 연결하거나 삭제할 수 있어요.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">입주민 목록</div>
+          <div class="card-desc">전체 · 미납 · 완납 · 부분납 필터로 입주민별 납부 상태를 확인하고 상세 처리를 할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="pro-flow">
+    <div class="section">
+      <div class="sec-label">자동 수납 전체 흐름</div>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div>
+            <div class="flow-name">수납 계좌 등록</div>
+            <div class="flow-desc">수납 설정에서 월세를 받을 계좌의 은행명, 계좌번호, 예금주를 등록합니다.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div>
+            <div class="flow-name">알림번호 등록 <span class="auto-tag">1회 설정</span></div>
+            <div class="flow-desc">터TOOL 알림번호를 은행 앱의 입금 알림번호로 등록합니다. 은행별 방법은 알림번호 설정 가이드를 참고하세요.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div>
+            <div class="flow-name">입주민 송금자명 등록</div>
+            <div class="flow-desc">각 입주민이 입금할 때 사용하는 이름을 터TOOL에 등록합니다. 이름이 일치해야 자동으로 누구의 수납인지 식별할 수 있어요.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div>
+            <div class="flow-name">입주민 입금 감지 <span class="auto-tag">자동</span></div>
+            <div class="flow-desc">입주민이 계좌로 입금하면 터TOOL이 자동으로 감지합니다.</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div>
+            <div class="flow-name">자동 완납 처리 <span class="auto-tag">자동</span></div>
+            <div class="flow-desc">등록된 송금자명과 입금자명이 일치하면 즉시 완납으로 처리되고, 원장님 앱으로 알림이 발송됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="pro-sender">
+    <div class="section">
+      <div class="notice">
+        <div class="notice-title">입금자명으로 입주민을 식별합니다</div>
+        <div class="notice-desc">은행 입금 시 표시되는 이름과 터TOOL에 등록된 송금자명이 일치해야 자동으로 해당 입주민의 수납으로 처리됩니다. 이름이 다르면 미확인 입금으로 분류됩니다.</div>
+      </div>
+      <div class="sec-label">등록 방법</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">수납 탭 하단 입주민 목록에서 선택</div>
+            <div class="step-desc">처리할 입주민 행을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">송금자명 입력</div>
+            <div class="step-desc">입주민이 입금 시 실제로 사용하는 이름을 입력합니다. 은행 계좌에 표시되는 이름과 정확히 일치해야 합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">저장</div>
+            <div class="step-desc">저장 후 해당 이름으로 입금이 들어오면 자동으로 이 입주민의 완납으로 처리됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="notice">
+        <div class="notice-title">동명이인이 있다면</div>
+        <div class="notice-desc">같은 이름의 입주민이 여러 명인 경우 송금자명을 다르게 설정하도록 안내해주세요. 예를 들어 홍길동이 두 명이라면 홍길동101, 홍길동202처럼 구분해서 등록하면 됩니다.</div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="pro-unmatched">
+    <div class="section">
+      <div class="sec-label">미확인 입금이 생기는 경우</div>
+      <div class="card">
+        <div class="card-item">
+          <div class="card-title">입금자명이 다를 때</div>
+          <div class="card-desc">입주민이 다른 이름으로 입금하거나 송금자명이 등록되지 않은 경우 <em>미확인 입금</em>으로 분류됩니다.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">테스트 입금을 했을 때</div>
+          <div class="card-desc">알림번호 등록 테스트 시 보낸 소액 입금이 미확인 입금으로 표시될 수 있습니다. 삭제하면 됩니다.</div>
+        </div>
+      </div>
+      <div class="sec-label">처리 방법</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">수납 화면의 미확인 입금 카드 탭</div>
+            <div class="step-desc">카드를 탭하면 해당 입금 내역과 처리 옵션이 표시됩니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">연결 또는 삭제 선택</div>
+            <div class="step-desc"><em>입주민과 연결하기</em>를 선택하면 어떤 입주민의 수납으로 처리할지 선택할 수 있습니다. 무관한 입금이라면 <em>삭제하기</em>로 제거하면 됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="pro-manual">
+    <div class="section">
+      <div class="sec-label">완납 처리하기</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">입주민 목록에서 해당 입주민 탭</div>
+            <div class="step-desc">수납 화면 하단 목록에서 처리할 입주민을 선택합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">완납 처리</div>
+            <div class="step-desc">상세 화면에서 완납 처리 버튼을 탭합니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">부분납 처리하기</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">입주민 상세 화면에서 부분납 처리 탭</div>
+            <div class="step-desc">입주민 상세 화면의 부분납 처리 버튼을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">받은 금액 입력 후 저장</div>
+            <div class="step-desc">실제로 받은 금액을 입력하면 나머지 미납 금액이 자동으로 계산됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="notice">
+        <div class="notice-title">잘못 처리했다면</div>
+        <div class="notice-desc">입주민 상세 화면에서 수납 취소를 통해 되돌릴 수 있습니다.</div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="pro-notice">
+    <div class="section">
+      <div class="sec-label">자동 독촉 알림</div>
+      <div class="card">
+        <div class="card-item">
+          <div class="card-title">발송 시점 설정</div>
+          <div class="card-desc">수납 설정에서 납부일 이후 며칠째에 독촉 알림을 보낼지 설정할 수 있습니다. 설정한 날짜에 미납 입주민에게 자동으로 알림이 발송됩니다.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">알림 내용</div>
+          <div class="card-desc">입주민 앱으로 미납 알림이 발송됩니다. 미납 경과 일수와 납부 금액이 함께 표시됩니다.</div>
+        </div>
+      </div>
+      <div class="sec-label">수동 독촉 알림</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">입주민 상세 화면으로 이동</div>
+            <div class="step-desc">수납 화면 하단 목록에서 미납 입주민을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">독촉 알림 전송</div>
+            <div class="step-desc">상세 화면에서 독촉 알림 버튼을 탭하면 즉시 해당 입주민 앱으로 알림이 발송됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="pro-diff">
+    <div class="section">
+      <div class="notice">
+        <div class="notice-title">방 변경 시 월세 차액을 자동으로 계산합니다</div>
+        <div class="notice-desc">터 관리 메뉴에서 입주민의 방을 변경하면, 이전 방과 새 방의 월세 차이를 기준으로 당월 일할 차액이 자동으로 계산됩니다.</div>
+      </div>
+      <div class="sec-label">예시</div>
+      <div class="card" style="padding:16px;border-radius:16px">
+        <div style="font-size:13px;color:#6e6e73;margin-bottom:12px;line-height:1.6">월 중간(15일)에 400,000원짜리 방에서 500,000원짜리 방으로 이동한 경우</div>
+        <div class="calc">
+          <div class="calc-row"><span class="calc-label">이전 방 월세</span><span class="calc-value">400,000원</span></div>
+          <div class="calc-row"><span class="calc-label">새 방 월세</span><span class="calc-value">500,000원</span></div>
+          <div class="calc-row"><span class="calc-label">변경일</span><span class="calc-value">15일</span></div>
+          <div class="calc-row calc-total"><span class="calc-label">이번 달 추가 납부</span><span class="calc-value">+16,667원</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-item">
+          <div class="card-title">수납 화면에 자동 반영</div>
+          <div class="card-desc">방 변경 후 해당 입주민의 수납 화면에 차액 항목이 자동으로 추가됩니다.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">입주민 앱에도 안내</div>
+          <div class="card-desc">입주민 앱에도 방 변경으로 인한 추가 납부 안내가 표시됩니다.</div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 베이직 플랜 -->
+<div class="plan-page" id="plan-basic">
+  <div class="sub-tabs" id="subtabs-basic">
+    <button class="sub-tab active" onclick="selectSub('basic','overview',this)">개요</button>
+    <button class="sub-tab" onclick="selectSub('basic','manual',this)">수동 처리</button>
+    <button class="sub-tab" onclick="selectSub('basic','notice',this)">미납 알림</button>
+  </div>
+
+  <div class="sub-page active" id="basic-overview">
+    <div class="section">
+      <div class="highlight">
+        <div class="highlight-title">베이직 플랜 수납 기능</div>
+        <div class="highlight-item">입주민별 납부 상태 확인 (미납 · 완납 · 부분납)</div>
+        <div class="highlight-item">완납 및 부분납 수동 처리</div>
+        <div class="highlight-item">미납 독촉 알림 수동 발송</div>
+        <div class="highlight-item">월별 수납 현황 조회</div>
+      </div>
+      <div class="notice">
+        <div class="notice-title">자동 수납은 프로 플랜 전용입니다</div>
+        <div class="notice-desc">베이직 플랜에서는 입금 확인 후 직접 완납 처리를 해야 합니다. 프로 플랜으로 업그레이드하면 입금 즉시 자동으로 처리됩니다.</div>
+      </div>
+      <div class="sec-label">수납 화면 구성</div>
+      <div class="card">
+        <div class="card-item">
+          <div class="card-title">월별 수납 현황 카드</div>
+          <div class="card-desc">상단 카드에서 이번 달 완납 · 미납 · 부분납 인원을 확인할 수 있습니다. 좌우 스와이프로 다른 달을 조회할 수 있어요.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">입주민 목록</div>
+          <div class="card-desc">전체 · 미납 · 완납 · 부분납 필터로 입주민별 납부 상태를 확인하고 상세 처리를 할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="basic-manual">
+    <div class="section">
+      <div class="sec-label">완납 처리하기</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">입주민 목록에서 해당 입주민 탭</div>
+            <div class="step-desc">수납 화면 하단 목록에서 처리할 입주민을 선택합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">완납 처리</div>
+            <div class="step-desc">상세 화면에서 완납 처리 버튼을 탭합니다. 완납 날짜가 자동으로 기록됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sec-label">부분납 처리하기</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">입주민 상세 화면에서 부분납 처리 탭</div>
+            <div class="step-desc">입주민 상세 화면의 부분납 처리 버튼을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">받은 금액 입력 후 저장</div>
+            <div class="step-desc">실제로 받은 금액을 입력하면 나머지 미납 금액이 자동으로 계산됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="notice">
+        <div class="notice-title">잘못 처리했다면</div>
+        <div class="notice-desc">입주민 상세 화면에서 수납 취소를 통해 되돌릴 수 있습니다.</div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+
+  <div class="sub-page" id="basic-notice">
+    <div class="section">
+      <div class="sec-label">수동 독촉 알림 보내기</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">입주민 상세 화면으로 이동</div>
+            <div class="step-desc">수납 화면 하단 목록에서 미납 입주민을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">독촉 알림 전송</div>
+            <div class="step-desc">상세 화면에서 독촉 알림 버튼을 탭하면 즉시 해당 입주민 앱으로 미납 알림이 발송됩니다.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-item">
+          <div class="card-title">알림 내용</div>
+          <div class="card-desc">입주민 앱으로 미납 알림이 발송됩니다. 미납 경과 일수와 납부 금액이 함께 표시됩니다.</div>
+        </div>
+        <div class="card-item">
+          <div class="card-title">자동 독촉 알림은 프로 전용</div>
+          <div class="card-desc">지정한 날짜에 자동으로 독촉 알림을 보내는 기능은 프로 플랜에서만 사용할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="bottom-space"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function selectPlan(plan, btn) {
+  document.querySelectorAll('.plan-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('plan-' + plan).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectSub(plan, sub, btn) {
+  document.querySelectorAll('#plan-' + plan + ' .sub-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#subtabs-' + plan + ' .sub-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(plan + '-' + sub).classList.add('active');
+  btn.classList.add('active');
+  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
