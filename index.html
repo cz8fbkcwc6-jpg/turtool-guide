@@ -3,137 +3,218 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>입금 알림번호 등록 | 터TOOL</title>
+<title>알림번호 등록 가이드 | 터TOOL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-height:1.5;max-width:480px;margin:0 auto;min-height:100vh}
+:root {
+  --green: #3F6B55;
+  --green-light: #f0fdf4;
+  --green-mid: #c5ddd0;
+  --green-dark: #2e5040;
+  --bg: #f5f5f7;
+  --white: #fff;
+  --text: #1c1c1e;
+  --text-sub: #6e6e73;
+  --text-hint: #8e8e93;
+  --border: #e5e5ea;
+  --radius: 16px;
+}
 
-/* 헤더 */
-.header{background:#fff;padding:20px 20px 0;position:sticky;top:0;z-index:100;border-bottom:1px solid #f0f0f0}
-.header-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.logo{width:32px;height:32px;background:#3F6B55;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.logo svg{width:18px;height:18px}
-.header-title{font-size:16px;font-weight:700;color:#1c1c1e}
-.header-sub{font-size:12px;color:#8e8e93;margin-top:1px}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; max-width: 480px; margin: 0 auto; min-height: 100vh; }
 
-/* 탭 */
-.tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;padding-bottom:0}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex-shrink:0;padding:12px 16px;font-size:14px;font-weight:500;color:#8e8e93;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .2s}
-.tab.active{color:#3F6B55;border-bottom-color:#3F6B55;font-weight:600}
+/* ─── HEADER ─── */
+.header {
+  background: var(--white);
+  padding: 18px 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #f0f0f0;
+}
+.header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.logo { width: 32px; height: 32px; background: var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo svg { width: 18px; height: 18px; }
+.header-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.header-sub { font-size: 12px; color: var(--text-hint); margin-top: 1px; }
 
-/* 섹션 */
-.section{padding:20px 20px 0}
-.page{display:none}
-.page.active{display:block}
+/* ─── PROGRESS BAR ─── */
+.progress-wrap { padding-bottom: 0; }
+.progress-steps { display: flex; align-items: center; justify-content: center; gap: 0; padding: 12px 20px; }
+.p-step { display: flex; align-items: center; gap: 0; }
+.p-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-hint); transition: all .3s; flex-shrink: 0; }
+.p-dot.done { background: var(--green); border-color: var(--green); color: #fff; }
+.p-dot.done svg { display: block; }
+.p-dot.active { background: var(--green); border-color: var(--green); color: #fff; box-shadow: 0 0 0 4px rgba(63,107,85,.15); }
+.p-line { width: 32px; height: 2px; background: var(--border); transition: background .3s; }
+.p-line.done { background: var(--green); }
+.p-label-row { display: flex; justify-content: space-between; padding: 0 12px 12px; }
+.p-label { font-size: 10px; color: var(--text-hint); text-align: center; flex: 1; transition: color .3s; }
+.p-label.active { color: var(--green); font-weight: 700; }
+.p-label.done { color: var(--green); }
 
-/* 안내 배너 */
-.notice{background:#f5f5f7;border-radius:14px;padding:16px;margin-bottom:12px}
-.notice-label{font-size:11px;font-weight:700;color:#6e6e73;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
-.notice p{font-size:14px;color:#3d3d3d;line-height:1.65}
+/* ─── SCREENS ─── */
+.screen { display: none; padding: 24px 20px 40px; animation: fadeUp .3s ease; }
+.screen.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 경고 배너 */
-.warning{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #e5e5ea}
-.warning-title{font-size:14px;font-weight:700;color:#1c1c1e;margin-bottom:6px}
-.warning p{font-size:13px;color:#6e6e73;line-height:1.65}
+/* ─── INTRO SCREEN ─── */
+.intro-hero { background: linear-gradient(135deg, var(--green) 0%, #2e5040 100%); border-radius: 20px; padding: 28px 24px; margin-bottom: 16px; color: #fff; }
+.intro-hero-icon { width: 52px; height: 52px; background: rgba(255,255,255,.15); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.intro-hero-icon svg { width: 28px; height: 28px; }
+.intro-hero h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; line-height: 1.3; }
+.intro-hero p { font-size: 14px; color: rgba(255,255,255,.8); line-height: 1.65; }
 
-/* 스텝 리스트 */
-.step-list{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px}
-.step-item{display:flex;align-items:flex-start;gap:14px;padding:16px;border-bottom:1px solid #f5f5f7}
-.step-item:last-child{border-bottom:none}
-.step-num{width:26px;height:26px;border-radius:50%;background:#3F6B55;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.step-title{font-size:15px;font-weight:600;color:#1c1c1e;margin-bottom:3px}
-.step-desc{font-size:13px;color:#6e6e73;line-height:1.5}
+.why-card { background: var(--white); border-radius: var(--radius); padding: 18px; margin-bottom: 16px; }
+.why-title { font-size: 13px; font-weight: 700; color: var(--text-hint); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 14px; }
+.why-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.why-item:last-child { margin-bottom: 0; }
+.why-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.why-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.why-text span { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
 
-/* 옵션 그리드 */
-.option-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.option-card{background:#fff;border-radius:14px;padding:14px}
-.option-card.full{grid-column:1/-1}
-.option-label{font-size:11px;font-weight:700;color:#8e8e93;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.option-value{font-size:15px;font-weight:600;color:#1c1c1e}
-.badge{display:inline-block;background:#3F6B55;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:2px 6px;margin-left:5px;vertical-align:middle;letter-spacing:.3px}
-.badge-warn{background:#f59e0b}
+.warn-card { background: #fff7ed; border-radius: var(--radius); padding: 16px; margin-bottom: 20px; border: 1px solid #fed7aa; }
+.warn-title { font-size: 13px; font-weight: 700; color: #9a3412; margin-bottom: 6px; }
+.warn-card p { font-size: 13px; color: #7c2d12; line-height: 1.6; }
 
-/* 팁 박스 */
-.tip{background:#f0fdf4;border-radius:14px;padding:14px;margin-top:8px}
-.tip-title{font-size:13px;font-weight:700;color:#065f46;margin-bottom:8px}
-.tip-item{font-size:13px;color:#047857;padding-left:14px;position:relative;line-height:1.5;margin-bottom:5px}
-.tip-item::before{content:'·';position:absolute;left:0;font-size:18px;line-height:1.2;font-weight:900}
-.tip-item:last-child{margin-bottom:0}
+/* ─── BANK SELECT ─── */
+.section-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.section-sub { font-size: 14px; color: var(--text-sub); margin-bottom: 20px; line-height: 1.5; }
+.bank-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.bank-btn {
+  background: var(--white); border-radius: 14px; padding: 16px 14px;
+  display: flex; align-items: center; gap: 12px;
+  border: 2px solid transparent; cursor: pointer;
+  transition: all .2s; text-align: left; width: 100%;
+}
+.bank-btn:hover { border-color: var(--green-mid); }
+.bank-btn.selected { border-color: var(--green); background: var(--green-light); }
+.bank-icon-sm { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #fff; flex-shrink: 0; letter-spacing: -.5px; }
+.bank-btn-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.bank-btn-sub { font-size: 11px; color: var(--text-hint); margin-top: 1px; }
+.bank-btn .check { margin-left: auto; width: 20px; height: 20px; border-radius: 50%; background: var(--green); display: none; align-items: center; justify-content: center; flex-shrink: 0; }
+.bank-btn.selected .check { display: flex; }
+.bank-btn .check svg { width: 11px; height: 11px; }
 
-/* 은행 선택 */
-.bank-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;margin-bottom:16px}
-.bank-chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;padding:8px 14px;border-radius:20px;border:1.5px solid #e5e5ea;background:#fff;font-size:13px;font-weight:600;color:#6e6e73;cursor:pointer;transition:all .15s}
-.chip.active{background:#3F6B55;border-color:#3F6B55;color:#fff}
+.no-support { background: #f5f5f7; border-radius: 14px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+.no-support-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+.no-support p { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+.no-support strong { color: var(--text); }
 
-/* 은행 카드 */
-.bank-panel{display:none}
-.bank-panel.active{display:block}
-.bank-card{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px}
-.bank-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid #f5f5f7}
-.bank-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;letter-spacing:-.5px}
-.bank-name{font-size:16px;font-weight:700;color:#1c1c1e}
-.bank-desc{font-size:12px;color:#8e8e93;margin-top:2px}
-.pc-tag{display:inline-flex;align-items:center;background:#f5f5f7;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#3d3d3d;margin-bottom:12px;letter-spacing:.2px}
+/* ─── STEP SCREENS ─── */
+.step-card { background: var(--white); border-radius: 20px; overflow: hidden; margin-bottom: 14px; }
+.step-card-head { padding: 18px 20px 16px; border-bottom: 1px solid #f5f5f7; }
+.step-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-light); border-radius: 20px; padding: 4px 10px; margin-bottom: 10px; }
+.step-badge-num { font-size: 11px; font-weight: 800; color: var(--green); }
+.step-card-title { font-size: 17px; font-weight: 800; color: var(--text); line-height: 1.3; margin-bottom: 4px; }
+.step-card-sub { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
+.step-card-body { padding: 18px 20px; }
 
-/* 경로 박스 */
-.path-box{background:#f5f5f7;border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.path-label{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:.5px;text-transform:uppercase;margin-bottom:7px}
-.path-text{font-size:13px;font-weight:600;color:#1c1c1e;display:flex;flex-wrap:wrap;align-items:center;gap:4px;line-height:1.7}
-.path-arrow{color:#8e8e93;font-size:12px;margin:0 1px}
+/* 앱 목업 느낌의 경로 표시 */
+.path-visual { background: #f5f5f7; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.path-visual-label { font-size: 10px; font-weight: 700; color: var(--text-hint); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 10px; }
+.path-visual-steps { display: flex; flex-direction: column; gap: 0; }
+.path-node { display: flex; align-items: center; gap: 10px; }
+.path-node-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.path-node-text { font-size: 13px; font-weight: 600; color: var(--text); }
+.path-connector { width: 8px; display: flex; justify-content: center; flex-shrink: 0; }
+.path-connector-line { width: 1.5px; height: 12px; background: var(--green-mid); }
 
-/* 은행 스텝 */
-.b-steps{display:flex;flex-direction:column;gap:10px}
-.b-step{display:flex;gap:10px;align-items:flex-start}
-.b-num{width:22px;height:22px;border-radius:50%;background:#f0f7f3;border:1.5px solid #3F6B55;color:#3F6B55;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.b-step p{font-size:13px;color:#1c1c1e;line-height:1.6}
-.b-step em{font-style:normal;font-weight:700;color:#3F6B55}
-.cs-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid #f5f5f7}
-.cs-label{font-size:12px;color:#8e8e93}
-.cs-num{font-size:13px;font-weight:700;color:#3F6B55}
+/* 설정 옵션 체크리스트 */
+.check-list { display: flex; flex-direction: column; gap: 8px; }
+.check-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 12px; }
 
-/* 수수료 테이블 */
-.fee-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:8px}
-.fee-row{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #f5f5f7}
-.fee-row:last-child{border-bottom:none}
-.fee-bank{font-size:14px;font-weight:600;color:#1c1c1e}
-.fee-info{display:flex;align-items:center;gap:8px}
-.fee-amount{font-size:13px;color:#6e6e73}
-.fee-badge{background:#f5f5f7;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:500;color:#8e8e93}
-.fee-note{font-size:12px;color:#8e8e93;padding:0 4px;line-height:1.6;margin-bottom:20px}
+/* 필수 — 초록 */
+.check-item.required { background: var(--green-light); }
+.check-item.required .check-item-icon { background: var(--green); }
 
-/* 테스트 섹션 */
-.test-header{background:#3F6B55;border-radius:16px 16px 0 0;padding:18px}
-.test-header h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
-.test-header p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.5}
-.test-body{background:#fff;border-radius:0 0 16px 16px;padding:18px;margin-bottom:12px}
-.input-label{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
-.input-preview{background:#f0f7f3;border:1.5px solid #c5ddd0;border-radius:10px;padding:12px 14px;margin-bottom:14px;display:none}
-.input-preview .plabel{font-size:10px;font-weight:700;color:#3F6B55;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
-.input-preview .ptext{font-size:13px;font-weight:600;color:#1c1c1e}
-.input-preview .ptext span{background:#3F6B55;color:#fff;border-radius:4px;padding:1px 7px;font-size:13px}
-.guide-box{background:#f5f5f7;border-radius:10px;padding:14px;margin-bottom:14px}
-.guide-title{font-size:13px;font-weight:700;color:#1c1c1e;margin-bottom:10px}
-.g-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
-.g-step:last-child{margin-bottom:0}
-.g-num{width:18px;height:18px;border-radius:50%;background:#3F6B55;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.g-step p{font-size:12px;color:#3d3d3d;line-height:1.6}
-.g-step em{font-style:normal;font-weight:700;color:#3F6B55}
+/* 하지말것 — 빨강 */
+.check-item.forbidden { background: #fff1f2; }
+.check-item.forbidden .check-item-icon { background: #e11d48; }
 
-/* 하단 여백 */
-.bottom-space{height:40px}
+/* 선택 — 파랑 */
+.check-item.optional { background: #eff6ff; }
+.check-item.optional .check-item-icon { background: #3b82f6; }
 
-/* 실제 앱 느낌 input */
-input[type="text"]{width:100%;border:1.5px solid #e5e5ea;border-radius:10px;padding:12px 14px;font-size:15px;font-family:'Pretendard',sans-serif;font-weight:500;color:#1c1c1e;background:#fff;outline:none;transition:border-color .2s;margin-bottom:14px}
-input[type="text"]:focus{border-color:#3F6B55}
-input[type="text"]::placeholder{color:#c7c7cc;font-weight:400}
+.check-item-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.check-item-icon svg { width: 13px; height: 13px; }
+.check-item-label { font-size: 14px; font-weight: 700; color: var(--text); }
+.check-item-value { font-size: 12px; color: var(--text-sub); margin-top: 2px; line-height: 1.5; }
+.req-tag { display: inline-block; background: var(--green); color: #fff; font-size: 9px; font-weight: 800; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; letter-spacing: .3px; }
+.forbid-tag { display: inline-block; background: #e11d48; color: #fff; font-size: 9px; font-weight: 800; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; letter-spacing: .3px; }
+.opt-tag { display: inline-block; background: #3b82f6; color: #fff; font-size: 9px; font-weight: 800; border-radius: 4px; padding: 1px 5px; margin-left: 4px; vertical-align: middle; letter-spacing: .3px; }
+
+/* 체크리스트 범례 */
+.check-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: var(--text-sub); }
+.legend-dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+.legend-dot.req { background: var(--green); }
+.legend-dot.forbid { background: #e11d48; }
+.legend-dot.opt { background: #3b82f6; }
+.tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 14px; margin-top: 14px; }
+.tip-box-title { font-size: 12px; font-weight: 700; color: #92400e; margin-bottom: 6px; }
+.tip-box p { font-size: 12px; color: #78350f; line-height: 1.6; }
+
+.info-box { background: var(--green-light); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.info-box p { font-size: 13px; color: #065f46; line-height: 1.65; }
+.info-box strong { color: var(--green-dark); }
+
+.pc-required { display: flex; align-items: center; gap: 8px; background: #fff7ed; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
+.pc-required-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.pc-required p { font-size: 13px; font-weight: 600; color: #9a3412; }
+
+/* ─── 완료 화면 ─── */
+.done-hero { text-align: center; padding: 32px 20px 24px; }
+.done-circle { width: 72px; height: 72px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 24px rgba(63,107,85,.3); }
+.done-circle svg { width: 36px; height: 36px; }
+.done-hero h2 { font-size: 22px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.done-hero p { font-size: 14px; color: var(--text-sub); line-height: 1.6; }
+
+.test-steps { background: var(--white); border-radius: 20px; overflow: hidden; margin-bottom: 14px; }
+.test-step-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-bottom: 1px solid #f5f5f7; }
+.test-step-item:last-child { border-bottom: none; }
+.test-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.test-step-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.test-step-desc { font-size: 13px; color: var(--text-sub); line-height: 1.5; }
+
+.error-card { background: var(--white); border-radius: 16px; padding: 18px; border: 1px solid var(--border); margin-bottom: 14px; }
+.error-card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.error-card p { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+
+/* ─── BUTTONS ─── */
+.btn-wrap { display: flex; gap: 10px; margin-top: 4px; }
+.btn-primary {
+  flex: 1; background: var(--green); color: #fff; border: none;
+  border-radius: 14px; padding: 16px; font-size: 16px; font-weight: 700;
+  font-family: 'Pretendard', sans-serif; cursor: pointer;
+  transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--green-dark); }
+.btn-primary:disabled { background: #c7c7cc; cursor: not-allowed; }
+.btn-secondary {
+  background: var(--white); color: var(--text-sub); border: 1.5px solid var(--border);
+  border-radius: 14px; padding: 16px 20px; font-size: 15px; font-weight: 600;
+  font-family: 'Pretendard', sans-serif; cursor: pointer;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--green-mid); color: var(--text); }
+
+.btn-arrow { display: inline-flex; align-items: center; }
+.btn-arrow svg { width: 18px; height: 18px; }
+
+/* ─── FEE TABLE ─── */
+.fee-section { background: var(--white); border-radius: 16px; overflow: hidden; margin-bottom: 14px; }
+.fee-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 16px; border-bottom: 1px solid #f5f5f7; }
+.fee-row:last-child { border-bottom: none; }
+.fee-bank { font-size: 14px; font-weight: 600; color: var(--text); }
+.fee-amount { font-size: 13px; color: var(--text-sub); }
+.fee-badge { background: #f5f5f7; border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 500; color: var(--text-hint); }
 </style>
 </head>
 <body>
 
+<!-- ─── HEADER ─── -->
 <div class="header">
   <div class="header-top">
     <div class="logo">
@@ -147,320 +228,704 @@ input[type="text"]::placeholder{color:#c7c7cc;font-weight:400}
       <div class="header-sub">터TOOL 자동 수납 설정</div>
     </div>
   </div>
-  <div class="tabs">
-    <button class="tab active" onclick="showPage('guide',this)">설정 방법</button>
-    <button class="tab" onclick="showPage('bank',this)">은행별 경로</button>
-    <button class="tab" onclick="showPage('fee',this)">수수료</button>
-    <button class="tab" onclick="showPage('test',this)">등록 확인</button>
+  <div class="progress-wrap">
+    <div class="progress-steps">
+      <div class="p-step">
+        <div class="p-dot active" id="dot-0">1</div>
+      </div>
+      <div class="p-line" id="line-0"></div>
+      <div class="p-step">
+        <div class="p-dot" id="dot-1">2</div>
+      </div>
+      <div class="p-line" id="line-1"></div>
+      <div class="p-step">
+        <div class="p-dot" id="dot-2">3</div>
+      </div>
+      <div class="p-line" id="line-2"></div>
+      <div class="p-step">
+        <div class="p-dot" id="dot-3">4</div>
+      </div>
+      <div class="p-line" id="line-3"></div>
+      <div class="p-step">
+        <div class="p-dot" id="dot-4">5</div>
+      </div>
+    </div>
+    <div class="p-label-row">
+      <div class="p-label active" id="label-0">시작</div>
+      <div class="p-label" id="label-1">은행</div>
+      <div class="p-label" id="label-2">번호복사</div>
+      <div class="p-label" id="label-3">등록</div>
+      <div class="p-label" id="label-4">완료</div>
+    </div>
   </div>
 </div>
 
-<!-- 설정 방법 -->
-<div class="page active" id="page-guide">
-  <div class="section">
-    <div style="height:16px"></div>
-    <div class="notice">
-      <div class="notice-label">이 설정이 필요한 이유</div>
-      <p>입주민이 월세를 입금하면 터TOOL이 자동으로 수납을 처리합니다. 알림번호를 등록하지 않으면 원장님이 직접 수동으로 처리해야 합니다.</p>
+<!-- ═══════════════════════════════════════ -->
+<!-- SCREEN 0: 시작 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="screen active" id="screen-0">
+  <div class="intro-hero">
+    <div class="intro-hero-icon">
+      <svg viewBox="0 0 28 28" fill="none">
+        <path d="M14 4L22 8.5V19.5L14 24L6 19.5V8.5L14 4Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M14 11V17M11 14H17" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      </svg>
     </div>
+    <h2>알림번호를 등록하면<br>월세가 자동으로 수납돼요</h2>
+    <p>5분이면 충분합니다. 한 단계씩 안내해드릴게요.</p>
+  </div>
 
-    <div class="step-list">
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div>
-          <div class="step-title">터TOOL 앱에서 알림번호 복사</div>
-          <div class="step-desc">수납 탭 → 설정 → 입금 알림번호 섹션에서 번호를 복사하세요.</div>
-        </div>
+  <div class="why-card">
+    <div class="why-title">이 설정이 필요한 이유</div>
+    <div class="why-item">
+      <div class="why-icon" style="background:#f0fdf4;">
+        <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><rect x="3" y="4" width="14" height="12" rx="2" stroke="#3F6B55" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="#3F6B55" stroke-width="1.5" stroke-linecap="round"/></svg>
       </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div>
-          <div class="step-title">은행 앱 또는 인터넷뱅킹 접속</div>
-          <div class="step-desc">월세 받는 계좌의 은행에 로그인하세요. 국민은행은 PC 필수입니다.</div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div>
-          <div class="step-title">입금 알림 설정에서 번호 추가</div>
-          <div class="step-desc">은행별 탭에서 정확한 메뉴 경로를 확인하세요.</div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div>
-          <div class="step-title">설정 옵션 확인 후 저장</div>
-          <div class="step-desc">아래 필수 옵션을 반드시 확인해주세요.</div>
-        </div>
+      <div class="why-text">
+        <strong>입금 자동 감지</strong>
+        <span>입주민이 월세를 입금하면 터TOOL이 자동으로 수납을 처리합니다</span>
       </div>
     </div>
+    <div class="why-item">
+      <div class="why-icon" style="background:#eff6ff;">
+        <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M10 3a5 5 0 0 1 5 5c0 2.5 1 3.5 1.5 4.5H3.5C4 11.5 5 10.5 5 8a5 5 0 0 1 5-5Z" stroke="#3b82f6" stroke-width="1.5"/><path d="M8.5 15.5a1.5 1.5 0 0 0 3 0" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="why-text">
+        <strong>실시간 알림</strong>
+        <span>입금 알림이 터TOOL로 전달되어 미납·수납 현황이 즉시 반영됩니다</span>
+      </div>
+    </div>
+    <div class="why-item" style="margin-bottom:0">
+      <div class="why-icon" style="background:#fefce8;">
+        <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><circle cx="10" cy="10" r="7" stroke="#d97706" stroke-width="1.5"/><path d="M10 6v5" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14" r=".8" fill="#d97706"/></svg>
+      </div>
+      <div class="why-text">
+        <strong>미등록 시 수동 처리 필요</strong>
+        <span>알림번호 없이는 원장님이 매달 직접 입금을 확인하고 기록해야 합니다</span>
+      </div>
+    </div>
+  </div>
 
-    <div style="font-size:13px;font-weight:700;color:#1c1c1e;margin-bottom:10px">필수 설정 옵션</div>
-    <div class="option-grid">
-      <div class="option-card">
-        <div class="option-label">입금통보</div>
-        <div class="option-value">체크 <span class="badge">필수</span></div>
-      </div>
-      <div class="option-card">
-        <div class="option-label">출금통보</div>
-        <div class="option-value" style="color:#8e8e93">해제</div>
-      </div>
-      <div class="option-card">
-        <div class="option-label">최소 금액</div>
-        <div class="option-value">0원 이상</div>
-      </div>
-      <div class="option-card">
-        <div class="option-label">통지 시간</div>
-        <div class="option-value">24시간 <span class="badge">필수</span></div>
-      </div>
-      <div class="option-card full">
-        <div class="option-label">잔액 표시</div>
-        <div class="option-value">표시 안함 <span class="badge">필수</span></div>
-        <div class="tip" style="margin-top:10px">
-          <div class="tip-title">잔액을 숨겨야 하는 이유</div>
-          <div class="tip-item">잔액 포함 시 문자가 두 건으로 분리될 수 있습니다</div>
-          <div class="tip-item">분리되면 자동 수납이 정상 처리되지 않습니다</div>
-        </div>
-      </div>
-    </div>
+  <div class="warn-card">
+    <div class="warn-title">카카오뱅크·토스뱅크·케이뱅크 불가</div>
+    <p>인터넷전문은행은 타인 번호 추가가 불가합니다. 국민·신한·우리·하나·기업·농협 계좌로 월세를 받아야 합니다.</p>
+  </div>
 
-    <div class="warning">
-      <div class="warning-title">카카오뱅크 · 토스뱅크 · 케이뱅크는 이용이 어렵습니다</div>
-      <p>인터넷전문은행은 타인 번호 추가가 불가능합니다. 자동 수납을 이용하려면 시중은행 계좌(국민, 신한, 우리, 하나 등)로 월세를 받으셔야 합니다.</p>
-    </div>
-    <div class="bottom-space"></div>
+  <div class="btn-wrap">
+    <button class="btn-primary" onclick="goTo(1)">
+      시작하기
+      <span class="btn-arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M6 4L12 9L6 14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button>
   </div>
 </div>
 
-<!-- 은행별 경로 -->
-<div class="page" id="page-bank">
-  <div class="section">
-    <div style="height:16px"></div>
-    <div class="bank-chips">
-      <button class="chip active" onclick="showBank('kb',this)">국민은행</button>
-      <button class="chip" onclick="showBank('shinhan',this)">신한은행</button>
-      <button class="chip" onclick="showBank('woori',this)">우리은행</button>
-      <button class="chip" onclick="showBank('hana',this)">하나은행</button>
-      <button class="chip" onclick="showBank('ibk',this)">기업은행</button>
-      <button class="chip" onclick="showBank('nh',this)">농협은행</button>
-    </div>
+<!-- ═══════════════════════════════════════ -->
+<!-- SCREEN 1: 은행 선택 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="screen" id="screen-1">
+  <div class="section-title">어느 은행 계좌로<br>월세를 받으시나요?</div>
+  <div class="section-sub">선택한 은행에 맞는 메뉴 경로를 안내드려요</div>
 
-    <div class="bank-panel active" id="bank-kb">
-      <div class="bank-card">
-        <div class="bank-head">
-          <div class="bank-icon" style="background:#ffbc00;color:#1a1a1a">KB</div>
-          <div>
-            <div class="bank-name">KB국민은행</div>
-            <div class="bank-desc">PC 인터넷뱅킹에서만 타인 번호 추가 가능</div>
-          </div>
-        </div>
-        <div class="pc-tag">PC 인터넷뱅킹 필수 — 모바일 앱 불가</div>
-        <div class="path-box">
-          <div class="path-label">메뉴 경로</div>
-          <div class="path-text">뱅킹관리 <span class="path-arrow">—</span> 통지서비스 <span class="path-arrow">—</span> 입출금내역 자동통지 서비스</div>
-        </div>
-        <div class="b-steps">
-          <div class="b-step"><div class="b-num">1</div><p><em>obank.kbstar.com</em> 접속 후 로그인</p></div>
-          <div class="b-step"><div class="b-num">2</div><p><em>뱅킹관리 → 통지서비스 → 입출금내역 자동통지 서비스</em> 선택</p></div>
-          <div class="b-step"><div class="b-num">3</div><p>통지받는 전화번호에 <em>알림번호 입력</em></p></div>
-          <div class="b-step"><div class="b-num">4</div><p><em>입금통지 체크</em>, 0원 이상, 24시간 실시간 통지, 잔액 표시 안함</p></div>
-        </div>
-        <div class="cs-row"><span class="cs-label">고객센터</span><span class="cs-num">1599-9999</span></div>
+  <div class="bank-grid">
+    <button class="bank-btn" onclick="selectBank('kb', this)">
+      <div class="bank-icon-sm" style="background:#ffbc00;color:#1a1a1a">KB</div>
+      <div>
+        <div class="bank-btn-name">국민은행</div>
+        <div class="bank-btn-sub">PC 필수</div>
       </div>
-    </div>
+      <div class="check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    </button>
+    <button class="bank-btn" onclick="selectBank('shinhan', this)">
+      <div class="bank-icon-sm" style="background:#0046ff">신한</div>
+      <div>
+        <div class="bank-btn-name">신한은행</div>
+        <div class="bank-btn-sub">앱/PC 가능</div>
+      </div>
+      <div class="check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    </button>
+    <button class="bank-btn" onclick="selectBank('woori', this)">
+      <div class="bank-icon-sm" style="background:#006fba">우리</div>
+      <div>
+        <div class="bank-btn-name">우리은행</div>
+        <div class="bank-btn-sub">앱/PC 가능</div>
+      </div>
+      <div class="check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    </button>
+    <button class="bank-btn" onclick="selectBank('hana', this)">
+      <div class="bank-icon-sm" style="background:#009a74">하나</div>
+      <div>
+        <div class="bank-btn-name">하나은행</div>
+        <div class="bank-btn-sub">앱/PC 가능</div>
+      </div>
+      <div class="check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    </button>
+    <button class="bank-btn" onclick="selectBank('ibk', this)">
+      <div class="bank-icon-sm" style="background:#006db7;font-size:11px">IBK</div>
+      <div>
+        <div class="bank-btn-name">기업은행</div>
+        <div class="bank-btn-sub">앱/PC 가능</div>
+      </div>
+      <div class="check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    </button>
+    <button class="bank-btn" onclick="selectBank('nh', this)">
+      <div class="bank-icon-sm" style="background:#00863c;font-size:12px">NH</div>
+      <div>
+        <div class="bank-btn-name">농협은행</div>
+        <div class="bank-btn-sub">앱/PC 가능</div>
+      </div>
+      <div class="check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    </button>
+  </div>
 
-    <div class="bank-panel" id="bank-shinhan">
-      <div class="bank-card">
-        <div class="bank-head">
-          <div class="bank-icon" style="background:#0046ff">신한</div>
-          <div>
-            <div class="bank-name">신한은행</div>
-            <div class="bank-desc">인터넷뱅킹 또는 앱에서 설정 가능</div>
-          </div>
-        </div>
-        <div class="path-box">
-          <div class="path-label">메뉴 경로</div>
-          <div class="path-text">개인뱅킹 <span class="path-arrow">—</span> 뱅킹보안관리 <span class="path-arrow">—</span> 입출내역 SMS 통지 서비스</div>
-        </div>
-        <div class="b-steps">
-          <div class="b-step"><div class="b-num">1</div><p><em>bank.shinhan.com</em> 또는 신한 SOL 앱 로그인</p></div>
-          <div class="b-step"><div class="b-num">2</div><p><em>개인뱅킹 → 뱅킹보안관리 → 입출내역 SMS 통지 서비스</em></p></div>
-          <div class="b-step"><div class="b-num">3</div><p>통지받는 전화번호에 <em>알림번호 입력</em></p></div>
-          <div class="b-step"><div class="b-num">4</div><p><em>입금통지 체크</em>, 계좌번호 표시함, 0원 이상, 24시간, 잔액 표시 안함</p></div>
-        </div>
-        <div class="cs-row"><span class="cs-label">고객센터</span><span class="cs-num">1577-8000</span></div>
-      </div>
-    </div>
+  <div class="no-support">
+    <div class="no-support-icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#8e8e93" stroke-width="1.5"/><path d="M6.5 13.5l7-7M13.5 13.5l-7-7" stroke="#8e8e93" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <p><strong>카카오뱅크, 토스뱅크, 케이뱅크</strong>는 타인 번호 추가가 불가하여 알림번호 등록이 지원되지 않습니다.</p>
+  </div>
 
-    <div class="bank-panel" id="bank-woori">
-      <div class="bank-card">
-        <div class="bank-head">
-          <div class="bank-icon" style="background:#006fba">우리</div>
-          <div>
-            <div class="bank-name">우리은행</div>
-            <div class="bank-desc">최대 100개 번호 추가 가능</div>
-          </div>
-        </div>
-        <div class="path-box">
-          <div class="path-label">메뉴 경로</div>
-          <div class="path-text">뱅킹관리 <span class="path-arrow">—</span> 통지서비스 <span class="path-arrow">—</span> SMS입출금통지서비스</div>
-        </div>
-        <div class="b-steps">
-          <div class="b-step"><div class="b-num">1</div><p>우리WON뱅킹 앱 또는 <em>spib.wooribank.com</em> 로그인</p></div>
-          <div class="b-step"><div class="b-num">2</div><p><em>뱅킹관리 → 통지서비스 → SMS입출금통지서비스 → 신규신청</em></p></div>
-          <div class="b-step"><div class="b-num">3</div><p>별도 지정 휴대폰번호에 <em>알림번호 입력</em></p></div>
-          <div class="b-step"><div class="b-num">4</div><p><em>입금통보 체크</em>, 0원 이상, 24시간, 잔액 표시 안함</p></div>
-        </div>
-        <div class="cs-row"><span class="cs-label">고객센터</span><span class="cs-num">1599-5000</span></div>
-      </div>
-    </div>
-
-    <div class="bank-panel" id="bank-hana">
-      <div class="bank-card">
-        <div class="bank-head">
-          <div class="bank-icon" style="background:#009a74">하나</div>
-          <div>
-            <div class="bank-name">하나은행</div>
-            <div class="bank-desc">월 800원 또는 건당 20원</div>
-          </div>
-        </div>
-        <div class="path-box">
-          <div class="path-label">메뉴 경로</div>
-          <div class="path-text">마이하나 <span class="path-arrow">—</span> 뱅킹관리 <span class="path-arrow">—</span> 통지서비스 <span class="path-arrow">—</span> 문자알리미서비스</div>
-        </div>
-        <div class="b-steps">
-          <div class="b-step"><div class="b-num">1</div><p>하나원큐 앱 또는 <em>kebhana.com</em> 로그인</p></div>
-          <div class="b-step"><div class="b-num">2</div><p><em>마이하나 → 뱅킹관리 → 통지서비스 → 문자알리미서비스 → 하나 입출금 거래내역 문자통지서비스</em></p></div>
-          <div class="b-step"><div class="b-num">3</div><p>수신번호 추가에 <em>알림번호 입력</em></p></div>
-          <div class="b-step"><div class="b-num">4</div><p><em>입금통보 체크</em>, 계좌잔액 표시 안함, 24시간 설정</p></div>
-        </div>
-        <div class="cs-row"><span class="cs-label">고객센터</span><span class="cs-num">1588-1111</span></div>
-      </div>
-    </div>
-
-    <div class="bank-panel" id="bank-ibk">
-      <div class="bank-card">
-        <div class="bank-head">
-          <div class="bank-icon" style="background:#006db7">IBK</div>
-          <div>
-            <div class="bank-name">IBK기업은행</div>
-            <div class="bank-desc">인터넷뱅킹 또는 앱에서 설정 가능</div>
-          </div>
-        </div>
-        <div class="path-box">
-          <div class="path-label">메뉴 경로</div>
-          <div class="path-text">뱅킹관리 <span class="path-arrow">—</span> 알림/통지서비스 <span class="path-arrow">—</span> 입출금알림(문자)</div>
-        </div>
-        <div class="b-steps">
-          <div class="b-step"><div class="b-num">1</div><p>IBK기업은행 앱 또는 <em>mybank.ibk.co.kr</em> 로그인</p></div>
-          <div class="b-step"><div class="b-num">2</div><p><em>뱅킹관리 → 알림/통지서비스 → 입출금알림(문자)</em> 선택</p></div>
-          <div class="b-step"><div class="b-num">3</div><p>통지받을 휴대폰번호에 <em>알림번호 입력</em></p></div>
-          <div class="b-step"><div class="b-num">4</div><p><em>입금만통지</em>, 잔액 표시 안함, 일반계좌번호 표시 체크</p></div>
-        </div>
-        <div class="cs-row"><span class="cs-label">고객센터</span><span class="cs-num">1566-2566</span></div>
-      </div>
-    </div>
-
-    <div class="bank-panel" id="bank-nh">
-      <div class="bank-card">
-        <div class="bank-head">
-          <div class="bank-icon" style="background:#00863c">NH</div>
-          <div>
-            <div class="bank-name">NH농협은행</div>
-            <div class="bank-desc">인터넷뱅킹에서 설정 가능</div>
-          </div>
-        </div>
-        <div class="path-box">
-          <div class="path-label">메뉴 경로 (버전에 따라 다를 수 있음)</div>
-          <div class="path-text">서비스/이용안내 <span class="path-arrow">—</span> 편리한 서비스 <span class="path-arrow">—</span> SMS 통지 서비스</div>
-        </div>
-        <div class="b-steps">
-          <div class="b-step"><div class="b-num">1</div><p>NH농협 인터넷뱅킹 또는 NH스마트뱅킹 앱 로그인</p></div>
-          <div class="b-step"><div class="b-num">2</div><p><em>서비스/이용안내 → 편리한 서비스 → SMS 통지 서비스</em> 선택<br>(또는 라운지 → UMS 입출금알림)</p></div>
-          <div class="b-step"><div class="b-num">3</div><p>통지받는 전화번호에 <em>알림번호 입력</em></p></div>
-          <div class="b-step"><div class="b-num">4</div><p><em>입금통지 체크</em>, 0원 이상, 24시간, 잔액 표시 안함</p></div>
-        </div>
-        <div class="cs-row"><span class="cs-label">고객센터</span><span class="cs-num">1588-2100</span></div>
-      </div>
-    </div>
-    <div class="bottom-space"></div>
+  <div class="btn-wrap" style="margin-top:20px">
+    <button class="btn-secondary" onclick="goTo(0)">이전</button>
+    <button class="btn-primary" id="btn-bank-next" onclick="goTo(2)" disabled>
+      다음
+      <span class="btn-arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M6 4L12 9L6 14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button>
   </div>
 </div>
 
-<!-- 수수료 -->
-<div class="page" id="page-fee">
-  <div class="section">
-    <div style="height:16px"></div>
-    <div class="fee-card">
-      <div class="fee-row">
-        <div class="fee-bank">국민은행</div>
-        <div class="fee-info"><span class="fee-amount">건당 20원</span><span class="fee-badge">등급별 상이</span></div>
+<!-- ═══════════════════════════════════════ -->
+<!-- SCREEN 2: 알림번호 복사 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="screen" id="screen-2">
+  <div class="step-card">
+    <div class="step-card-head">
+      <div class="step-badge"><span class="step-badge-num">STEP 1</span></div>
+      <div class="step-card-title">터TOOL 앱에서<br>알림번호를 복사하세요</div>
+      <div class="step-card-sub">이 번호를 은행에 등록해야 입금 알림이 전달됩니다</div>
+    </div>
+    <div class="step-card-body">
+      <div class="path-visual">
+        <div class="path-visual-label">앱 이동 경로</div>
+        <div class="path-visual-steps">
+          <div class="path-node">
+            <div class="path-node-dot"></div>
+            <div class="path-node-text">수납 탭</div>
+          </div>
+          <div class="path-node" style="margin: 4px 0 4px 3px">
+            <div class="path-connector"><div class="path-connector-line"></div></div>
+          </div>
+          <div class="path-node">
+            <div class="path-node-dot"></div>
+            <div class="path-node-text">설정</div>
+          </div>
+          <div class="path-node" style="margin: 4px 0 4px 3px">
+            <div class="path-connector"><div class="path-connector-line"></div></div>
+          </div>
+          <div class="path-node">
+            <div class="path-node-dot" style="background:#065f46"></div>
+            <div class="path-node-text" style="color:#065f46;font-weight:700">입금 알림번호 섹션 → 번호 복사</div>
+          </div>
+        </div>
       </div>
-      <div class="fee-row">
-        <div class="fee-bank">신한은행</div>
-        <div class="fee-info"><span class="fee-amount">건당 부과</span><span class="fee-badge">등급별 상이</span></div>
-      </div>
-      <div class="fee-row">
-        <div class="fee-bank">우리은행</div>
-        <div class="fee-info"><span class="fee-amount">건당 20원</span><span class="fee-amount">월 900원</span></div>
-      </div>
-      <div class="fee-row">
-        <div class="fee-bank">하나은행</div>
-        <div class="fee-info"><span class="fee-amount">건당 20원</span><span class="fee-amount">월 800원</span></div>
-      </div>
-      <div class="fee-row">
-        <div class="fee-bank">기업은행</div>
-        <div class="fee-info"><span class="fee-badge">고객센터 문의</span></div>
-      </div>
-      <div class="fee-row">
-        <div class="fee-bank">농협은행</div>
-        <div class="fee-info"><span class="fee-badge">고객센터 문의</span></div>
+      <div class="tip-box">
+        <div class="tip-box-title">복사 후 메모장에 잠시 붙여놓으세요</div>
+        <p>은행 앱을 열 때 번호가 필요합니다. 미리 복사해두면 편리해요.</p>
       </div>
     </div>
-    <div class="fee-note">입주민이 10명이라면 한 달 입금이 약 10건 — 건당 방식 시 약 200원으로 건당 방식이 유리할 수 있습니다.</div>
-    <div class="bottom-space"></div>
+  </div>
+
+  <div class="btn-wrap">
+    <button class="btn-secondary" onclick="goTo(1)">이전</button>
+    <button class="btn-primary" onclick="goTo(3)">
+      복사했어요
+      <span class="btn-arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M6 4L12 9L6 14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button>
   </div>
 </div>
 
-<!-- 등록 확인 -->
-<div class="page" id="page-test">
-  <div class="section">
-    <div style="height:16px"></div>
-    <div class="test-header">
-      <h3>알림번호 정상 작동 확인하기</h3>
-      <p>등록 후 실제로 입금이 감지되는지 앱에서 확인할 수 있습니다.</p>
-    </div>
-    <div class="test-body">
-      <div class="guide-box">
-        <div class="guide-title">터TOOL 앱에서 테스트하는 방법</div>
-        <div class="g-step"><div class="g-num">1</div><p>터TOOL 앱 수납 설정 화면으로 이동하세요</p></div>
-        <div class="g-step"><div class="g-num">2</div><p><em>알림번호 테스트</em> 버튼을 눌러 테스트를 시작하세요</p></div>
-        <div class="g-step"><div class="g-num">3</div><p>안내에 따라 월세 받는 계좌로 <em>소액을 입금</em>하세요</p></div>
-        <div class="g-step"><div class="g-num">4</div><p>입금이 감지되면 터TOOL <em>보드에 설정 완료 알림</em>이 도착합니다</p></div>
+<!-- ═══════════════════════════════════════ -->
+<!-- SCREEN 3: 은행 등록 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="screen" id="screen-3">
+  <!-- 국민은행 -->
+  <div id="guide-kb" class="bank-guide" style="display:none">
+    <div class="step-card">
+      <div class="step-card-head">
+        <div class="step-badge"><span class="step-badge-num">STEP 2</span></div>
+        <div class="step-card-title">KB국민은행에서<br>알림번호를 등록하세요</div>
+        <div class="step-card-sub">반드시 PC 인터넷뱅킹에서 진행해야 합니다</div>
       </div>
-      <div class="warning" style="margin-bottom:0">
-        <div class="warning-title">작동하지 않는다면</div>
-        <p>은행 앱에서 알림번호 등록 설정을 다시 확인해주세요. 설정 후 반영까지 최대 1일이 소요될 수 있습니다.</p>
+      <div class="step-card-body">
+        <div class="pc-required">
+          <div class="pc-required-icon"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="3" width="14" height="10" rx="1.5" stroke="#9a3412" stroke-width="1.4"/><path d="M6 15h6M9 13v2" stroke="#9a3412" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <p>PC 인터넷뱅킹 필수 — 모바일 앱 불가</p>
+        </div>
+        <div class="path-visual">
+          <div class="path-visual-label">메뉴 경로 — obank.kbstar.com</div>
+          <div class="path-visual-steps">
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">뱅킹관리</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">통지서비스</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot" style="background:#065f46"></div><div class="path-node-text" style="color:#065f46;font-weight:700">입출금내역 자동통지 서비스</div></div>
+          </div>
+        </div>
+<div class="check-legend">
+          <div class="legend-item"><div class="legend-dot req"></div>필수</div>
+          <div class="legend-item"><div class="legend-dot forbid"></div>설정 제외</div>
+          <div class="legend-item"><div class="legend-dot opt"></div>권장</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">입금통지 <span class="req-tag">필수</span></div><div class="check-item-value">입금 알림을 받아야 터TOOL이 자동 수납을 처리할 수 있습니다</div></div>
+          </div>
+          <div class="check-item forbidden">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M3 3L10 10M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">출금통지 <span class="forbid-tag">설정 제외</span></div><div class="check-item-value">출금 알림 포함 시 문자가 2건으로 분리되어 자동 수납이 실패합니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">잔액 표시 안함 <span class="req-tag">필수</span></div><div class="check-item-value">잔액이 포함되면 문자가 2건으로 나뉘어 자동 수납이 정상 처리되지 않습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">24시간 실시간 통지 <span class="req-tag">필수</span></div><div class="check-item-value">시간 제한이 있으면 야간 입금이 누락될 수 있습니다</div></div>
+          </div>
+          <div class="check-item optional">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="2.5" fill="white"/></svg></div>
+            <div><div class="check-item-label">최소 금액 0원 이상 <span class="opt-tag">권장</span></div><div class="check-item-value">소액 입금도 감지하려면 0원 이상으로 설정하세요</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">통지받는 번호에 알림번호 입력 <span class="req-tag">필수</span></div><div class="check-item-value">터TOOL 앱에서 복사한 알림번호를 이 칸에 붙여넣으세요</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f5f5f7">
+          <span style="font-size:12px;color:var(--text-hint)">고객센터</span>
+          <span style="font-size:13px;font-weight:700;color:var(--green)">1599-9999</span>
+        </div>
       </div>
     </div>
-    <div class="bottom-space"></div>
+  </div>
+
+  <!-- 신한은행 -->
+  <div id="guide-shinhan" class="bank-guide" style="display:none">
+    <div class="step-card">
+      <div class="step-card-head">
+        <div class="step-badge"><span class="step-badge-num">STEP 2</span></div>
+        <div class="step-card-title">신한은행에서<br>알림번호를 등록하세요</div>
+        <div class="step-card-sub">신한 SOL 앱 또는 PC 인터넷뱅킹 모두 가능합니다</div>
+      </div>
+      <div class="step-card-body">
+        <div class="path-visual">
+          <div class="path-visual-label">메뉴 경로 — bank.shinhan.com 또는 SOL 앱</div>
+          <div class="path-visual-steps">
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">개인뱅킹</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">뱅킹보안관리</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot" style="background:#065f46"></div><div class="path-node-text" style="color:#065f46;font-weight:700">입출내역 SMS 통지 서비스</div></div>
+          </div>
+        </div>
+<div class="check-legend">
+          <div class="legend-item"><div class="legend-dot req"></div>필수</div>
+          <div class="legend-item"><div class="legend-dot forbid"></div>설정 제외</div>
+          <div class="legend-item"><div class="legend-dot opt"></div>권장</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">입금통지 <span class="req-tag">필수</span></div><div class="check-item-value">입금 알림을 받아야 터TOOL이 자동 수납을 처리할 수 있습니다</div></div>
+          </div>
+          <div class="check-item forbidden">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M3 3L10 10M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">출금통지 <span class="forbid-tag">설정 제외</span></div><div class="check-item-value">출금 알림 포함 시 문자가 2건으로 분리되어 자동 수납이 실패합니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">잔액 표시 안함 <span class="req-tag">필수</span></div><div class="check-item-value">잔액이 포함되면 문자가 2건으로 나뉘어 자동 수납이 정상 처리되지 않습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">24시간 통지 <span class="req-tag">필수</span></div><div class="check-item-value">시간 제한이 있으면 야간 입금이 누락될 수 있습니다</div></div>
+          </div>
+          <div class="check-item optional">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="2.5" fill="white"/></svg></div>
+            <div><div class="check-item-label">계좌번호 표시함 <span class="opt-tag">권장</span></div><div class="check-item-value">어떤 계좌로 입금됐는지 확인하기 위해 권장합니다</div></div>
+          </div>
+          <div class="check-item optional">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="2.5" fill="white"/></svg></div>
+            <div><div class="check-item-label">0원 이상 <span class="opt-tag">권장</span></div><div class="check-item-value">소액 입금도 감지하려면 0원 이상으로 설정하세요</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f5f5f7">
+          <span style="font-size:12px;color:var(--text-hint)">고객센터</span>
+          <span style="font-size:13px;font-weight:700;color:var(--green)">1577-8000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 우리은행 -->
+  <div id="guide-woori" class="bank-guide" style="display:none">
+    <div class="step-card">
+      <div class="step-card-head">
+        <div class="step-badge"><span class="step-badge-num">STEP 2</span></div>
+        <div class="step-card-title">우리은행에서<br>알림번호를 등록하세요</div>
+        <div class="step-card-sub">우리WON뱅킹 앱 또는 PC 모두 가능합니다</div>
+      </div>
+      <div class="step-card-body">
+        <div class="path-visual">
+          <div class="path-visual-label">메뉴 경로 — 우리WON뱅킹 앱 또는 spib.wooribank.com</div>
+          <div class="path-visual-steps">
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">뱅킹관리</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">통지서비스</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">SMS입출금통지서비스</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot" style="background:#065f46"></div><div class="path-node-text" style="color:#065f46;font-weight:700">신규신청</div></div>
+          </div>
+        </div>
+<div class="check-legend">
+          <div class="legend-item"><div class="legend-dot req"></div>필수</div>
+          <div class="legend-item"><div class="legend-dot forbid"></div>설정 제외</div>
+          <div class="legend-item"><div class="legend-dot opt"></div>권장</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">입금통보 <span class="req-tag">필수</span></div><div class="check-item-value">입금 알림을 받아야 터TOOL이 자동 수납을 처리할 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">잔액 표시 안함 <span class="req-tag">필수</span></div><div class="check-item-value">잔액이 포함되면 문자가 2건으로 나뉘어 자동 수납이 정상 처리되지 않습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">24시간 <span class="req-tag">필수</span></div><div class="check-item-value">시간 제한이 있으면 야간 입금이 누락될 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">별도 지정 휴대폰번호에 알림번호 입력 <span class="req-tag">필수</span></div><div class="check-item-value">최대 100개 번호 추가 가능 — 복사한 알림번호를 붙여넣으세요</div></div>
+          </div>
+          <div class="check-item optional">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="2.5" fill="white"/></svg></div>
+            <div><div class="check-item-label">0원 이상 <span class="opt-tag">권장</span></div><div class="check-item-value">소액 입금도 감지하려면 0원 이상으로 설정하세요</div></div>
+          </div>
+          <div class="check-item forbidden">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M3 3L10 10M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">출금통보 <span class="forbid-tag">설정 제외</span></div><div class="check-item-value">출금 알림 포함 시 문자가 2건으로 분리되어 자동 수납이 실패합니다</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f5f5f7">
+          <span style="font-size:12px;color:var(--text-hint)">고객센터</span>
+          <span style="font-size:13px;font-weight:700;color:var(--green)">1599-5000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하나은행 -->
+  <div id="guide-hana" class="bank-guide" style="display:none">
+    <div class="step-card">
+      <div class="step-card-head">
+        <div class="step-badge"><span class="step-badge-num">STEP 2</span></div>
+        <div class="step-card-title">하나은행에서<br>알림번호를 등록하세요</div>
+        <div class="step-card-sub">하나원큐 앱 또는 PC 모두 가능합니다</div>
+      </div>
+      <div class="step-card-body">
+        <div class="path-visual">
+          <div class="path-visual-label">메뉴 경로 — 하나원큐 앱 또는 kebhana.com</div>
+          <div class="path-visual-steps">
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">마이하나</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">뱅킹관리</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">통지서비스</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot" style="background:#065f46"></div><div class="path-node-text" style="color:#065f46;font-weight:700">문자알리미서비스 → 하나 입출금 거래내역 문자통지서비스</div></div>
+          </div>
+        </div>
+<div class="check-legend">
+          <div class="legend-item"><div class="legend-dot req"></div>필수</div>
+          <div class="legend-item"><div class="legend-dot forbid"></div>설정 제외</div>
+          <div class="legend-item"><div class="legend-dot opt"></div>권장</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">입금통보 <span class="req-tag">필수</span></div><div class="check-item-value">입금 알림을 받아야 터TOOL이 자동 수납을 처리할 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">계좌잔액 표시 안함 <span class="req-tag">필수</span></div><div class="check-item-value">잔액이 포함되면 문자가 2건으로 나뉘어 자동 수납이 정상 처리되지 않습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">24시간 설정 <span class="req-tag">필수</span></div><div class="check-item-value">시간 제한이 있으면 야간 입금이 누락될 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">수신번호 추가에 알림번호 입력 <span class="req-tag">필수</span></div><div class="check-item-value">복사한 터TOOL 알림번호를 이 칸에 붙여넣으세요</div></div>
+          </div>
+          <div class="check-item forbidden">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M3 3L10 10M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">출금통보 <span class="forbid-tag">설정 제외</span></div><div class="check-item-value">출금 알림 포함 시 문자가 2건으로 분리되어 자동 수납이 실패합니다</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f5f5f7">
+          <span style="font-size:12px;color:var(--text-hint)">고객센터</span>
+          <span style="font-size:13px;font-weight:700;color:var(--green)">1588-1111</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기업은행 -->
+  <div id="guide-ibk" class="bank-guide" style="display:none">
+    <div class="step-card">
+      <div class="step-card-head">
+        <div class="step-badge"><span class="step-badge-num">STEP 2</span></div>
+        <div class="step-card-title">IBK기업은행에서<br>알림번호를 등록하세요</div>
+        <div class="step-card-sub">IBK기업은행 앱 또는 PC 인터넷뱅킹 모두 가능합니다</div>
+      </div>
+      <div class="step-card-body">
+        <div class="path-visual">
+          <div class="path-visual-label">메뉴 경로 — IBK기업은행 앱 또는 mybank.ibk.co.kr</div>
+          <div class="path-visual-steps">
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">뱅킹관리</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">알림/통지서비스</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot" style="background:#065f46"></div><div class="path-node-text" style="color:#065f46;font-weight:700">입출금알림(문자)</div></div>
+          </div>
+        </div>
+<div class="check-legend">
+          <div class="legend-item"><div class="legend-dot req"></div>필수</div>
+          <div class="legend-item"><div class="legend-dot forbid"></div>설정 제외</div>
+          <div class="legend-item"><div class="legend-dot opt"></div>권장</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">입금만통지 <span class="req-tag">필수</span></div><div class="check-item-value">입금 알림을 받아야 터TOOL이 자동 수납을 처리할 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">잔액 표시 안함 <span class="req-tag">필수</span></div><div class="check-item-value">잔액이 포함되면 문자가 2건으로 나뉘어 자동 수납이 정상 처리되지 않습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">통지받을 휴대폰번호에 알림번호 입력 <span class="req-tag">필수</span></div><div class="check-item-value">복사한 터TOOL 알림번호를 이 칸에 붙여넣으세요</div></div>
+          </div>
+          <div class="check-item optional">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="2.5" fill="white"/></svg></div>
+            <div><div class="check-item-label">일반계좌번호 표시 <span class="opt-tag">권장</span></div><div class="check-item-value">어떤 계좌로 입금됐는지 확인하기 위해 권장합니다</div></div>
+          </div>
+          <div class="check-item forbidden">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M3 3L10 10M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">출금통지 <span class="forbid-tag">설정 제외</span></div><div class="check-item-value">출금 알림 포함 시 문자가 2건으로 분리되어 자동 수납이 실패합니다</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f5f5f7">
+          <span style="font-size:12px;color:var(--text-hint)">고객센터</span>
+          <span style="font-size:13px;font-weight:700;color:var(--green)">1566-2566</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 농협은행 -->
+  <div id="guide-nh" class="bank-guide" style="display:none">
+    <div class="step-card">
+      <div class="step-card-head">
+        <div class="step-badge"><span class="step-badge-num">STEP 2</span></div>
+        <div class="step-card-title">NH농협은행에서<br>알림번호를 등록하세요</div>
+        <div class="step-card-sub">NH농협 인터넷뱅킹 또는 NH스마트뱅킹 앱 가능</div>
+      </div>
+      <div class="step-card-body">
+        <div class="path-visual">
+          <div class="path-visual-label">메뉴 경로 — 버전에 따라 다를 수 있음</div>
+          <div class="path-visual-steps">
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">서비스/이용안내</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot"></div><div class="path-node-text">편리한 서비스</div></div>
+            <div class="path-node" style="margin:4px 0 4px 3px"><div class="path-connector"><div class="path-connector-line"></div></div></div>
+            <div class="path-node"><div class="path-node-dot" style="background:#065f46"></div><div class="path-node-text" style="color:#065f46;font-weight:700">SMS 통지 서비스</div></div>
+          </div>
+        </div>
+        <div class="info-box">
+          <p>또는 <strong>라운지 → UMS 입출금알림</strong> 경로로도 접근 가능합니다</p>
+        </div>
+<div class="check-legend">
+          <div class="legend-item"><div class="legend-dot req"></div>필수</div>
+          <div class="legend-item"><div class="legend-dot forbid"></div>설정 제외</div>
+          <div class="legend-item"><div class="legend-dot opt"></div>권장</div>
+        </div>
+        <div class="check-list">
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">입금통지 <span class="req-tag">필수</span></div><div class="check-item-value">입금 알림을 받아야 터TOOL이 자동 수납을 처리할 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">잔액 표시 안함 <span class="req-tag">필수</span></div><div class="check-item-value">잔액이 포함되면 문자가 2건으로 나뉘어 자동 수납이 정상 처리되지 않습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">24시간 <span class="req-tag">필수</span></div><div class="check-item-value">시간 제한이 있으면 야간 입금이 누락될 수 있습니다</div></div>
+          </div>
+          <div class="check-item required">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">통지받는 전화번호에 알림번호 입력 <span class="req-tag">필수</span></div><div class="check-item-value">복사한 터TOOL 알림번호를 이 칸에 붙여넣으세요</div></div>
+          </div>
+          <div class="check-item optional">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="2.5" fill="white"/></svg></div>
+            <div><div class="check-item-label">0원 이상 <span class="opt-tag">권장</span></div><div class="check-item-value">소액 입금도 감지하려면 0원 이상으로 설정하세요</div></div>
+          </div>
+          <div class="check-item forbidden">
+            <div class="check-item-icon"><svg viewBox="0 0 13 13" fill="none"><path d="M3 3L10 10M10 3L3 10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div><div class="check-item-label">출금통지 <span class="forbid-tag">설정 제외</span></div><div class="check-item-value">출금 알림 포함 시 문자가 2건으로 분리되어 자동 수납이 실패합니다</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f5f5f7">
+          <span style="font-size:12px;color:var(--text-hint)">고객센터</span>
+          <span style="font-size:13px;font-weight:700;color:var(--green)">1588-2100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-wrap">
+    <button class="btn-secondary" onclick="goTo(2)">이전</button>
+    <button class="btn-primary" onclick="goTo(4)">
+      등록 완료!
+      <span class="btn-arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M6 4L12 9L6 14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button>
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SCREEN 4: 완료 & 테스트 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="screen" id="screen-4">
+  <div class="done-hero">
+    <div class="done-circle">
+      <svg viewBox="0 0 36 36" fill="none"><path d="M8 18L15 25L28 11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>등록이 완료됐어요</h2>
+    <p>이제 입주민이 입금하면<br>터TOOL이 자동으로 수납을 처리합니다</p>
+  </div>
+
+  <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px">정상 작동 확인하기</div>
+  <div class="test-steps">
+    <div class="test-step-item">
+      <div class="test-step-num">1</div>
+      <div>
+        <div class="test-step-title">터TOOL 앱 수납 설정으로 이동</div>
+        <div class="test-step-desc">수납 탭 → 설정 화면으로 이동하세요</div>
+      </div>
+    </div>
+    <div class="test-step-item">
+      <div class="test-step-num">2</div>
+      <div>
+        <div class="test-step-title">알림번호 테스트 버튼 누르기</div>
+        <div class="test-step-desc">테스트 버튼을 눌러 테스트를 시작하세요</div>
+      </div>
+    </div>
+    <div class="test-step-item">
+      <div class="test-step-num">3</div>
+      <div>
+        <div class="test-step-title">월세 계좌로 소액 입금</div>
+        <div class="test-step-desc">안내에 따라 월세 받는 계좌로 소액을 입금하세요</div>
+      </div>
+    </div>
+    <div class="test-step-item">
+      <div class="test-step-num">4</div>
+      <div>
+        <div class="test-step-title">터TOOL 보드에서 완료 알림 확인</div>
+        <div class="test-step-desc">입금이 감지되면 보드에 설정 완료 알림이 도착합니다</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-card">
+    <div class="error-card-title">작동하지 않는다면</div>
+    <p>은행 앱에서 알림번호 등록 설정을 다시 확인해주세요. 설정 후 반영까지 <strong>최대 1일</strong>이 소요될 수 있습니다.</p>
+  </div>
+
+  <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px">SMS 수수료 안내</div>
+  <div class="fee-section">
+    <div class="fee-row"><div class="fee-bank">국민은행</div><div style="display:flex;gap:8px;align-items:center"><span class="fee-amount">건당 20원</span><span class="fee-badge">등급별 상이</span></div></div>
+    <div class="fee-row"><div class="fee-bank">신한은행</div><div style="display:flex;gap:8px;align-items:center"><span class="fee-amount">건당 부과</span><span class="fee-badge">등급별 상이</span></div></div>
+    <div class="fee-row"><div class="fee-bank">우리은행</div><div style="display:flex;gap:8px;align-items:center"><span class="fee-amount">건당 20원</span><span class="fee-amount">또는 월 900원</span></div></div>
+    <div class="fee-row"><div class="fee-bank">하나은행</div><div style="display:flex;gap:8px;align-items:center"><span class="fee-amount">건당 20원</span><span class="fee-amount">또는 월 800원</span></div></div>
+    <div class="fee-row"><div class="fee-bank">기업은행</div><div><span class="fee-badge">고객센터 문의</span></div></div>
+    <div class="fee-row"><div class="fee-bank">농협은행</div><div><span class="fee-badge">고객센터 문의</span></div></div>
+  </div>
+  <div style="font-size:12px;color:var(--text-hint);line-height:1.6;margin-bottom:24px">입주민이 10명이라면 한 달 입금이 약 10건 — 건당 방식 시 약 200원으로 건당 방식이 유리할 수 있습니다.</div>
+
+  <button class="btn-primary" onclick="goTo(0)" style="width:100%">
+    처음부터 다시 보기
+  </button>
+</div>
+
+<div style="height:40px"></div>
 
 <script>
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo(0, 0);
+let currentBank = null;
+
+function goTo(step) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + step).classList.add('active');
+  updateProgress(step);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // 은행 가이드 표시
+  if (step === 3 && currentBank) {
+    document.querySelectorAll('.bank-guide').forEach(g => g.style.display = 'none');
+    const guide = document.getElementById('guide-' + currentBank);
+    if (guide) guide.style.display = 'block';
+  }
 }
-function showBank(id, btn) {
-  document.querySelectorAll('.bank-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  document.getElementById('bank-' + id).classList.add('active');
-  btn.classList.add('active');
-  btn.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+
+function updateProgress(step) {
+  const labels = ['label-0','label-1','label-2','label-3','label-4'];
+  const dots = ['dot-0','dot-1','dot-2','dot-3','dot-4'];
+  const lines = ['line-0','line-1','line-2','line-3'];
+
+  dots.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('active', 'done');
+    if (i < step) {
+      el.classList.add('done');
+      el.innerHTML = '<svg viewBox="0 0 13 13" fill="none" style="display:block;width:12px;height:12px"><path d="M2 6.5L5 9.5L11 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    } else if (i === step) {
+      el.classList.add('active');
+      el.innerHTML = (i + 1).toString();
+    } else {
+      el.innerHTML = (i + 1).toString();
+    }
+  });
+
+  lines.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.toggle('done', i < step);
+  });
+
+  labels.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('active', 'done');
+    if (i < step) el.classList.add('done');
+    else if (i === step) el.classList.add('active');
+  });
+}
+
+function selectBank(bankId, btn) {
+  document.querySelectorAll('.bank-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentBank = bankId;
+  document.getElementById('btn-bank-next').disabled = false;
 }
 </script>
 </body>
