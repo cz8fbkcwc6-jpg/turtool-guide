@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>계정 삭제 | 터TOOL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green: #3F6B55;
+  --green-light: #f0fdf4;
+  --green-mid: #c5ddd0;
+  --bg: #f5f5f7;
+  --white: #fff;
+  --text: #1c1c1e;
+  --text-sub: #6e6e73;
+  --text-hint: #8e8e93;
+  --border: #e5e5ea;
+  --red: #e11d48;
+  --red-light: #fff1f2;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; max-width: 480px; margin: 0 auto; min-height: 100vh; }
+
+.header { background: var(--white); padding: 18px 20px; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; align-items: center; gap: 10px; }
+.logo { width: 32px; height: 32px; background: var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo svg { width: 18px; height: 18px; }
+.header-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.header-sub { font-size: 12px; color: var(--text-hint); margin-top: 1px; }
+
+.content { padding: 24px 20px 60px; }
+
+.hero { background: linear-gradient(135deg, #1c1c1e 0%, #3d3d3d 100%); border-radius: 18px; padding: 24px 20px; margin-bottom: 20px; }
+.hero-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+.hero-desc { font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.65; }
+
+.section { margin-bottom: 24px; }
+.section-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.step-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.step-item { background: var(--white); border-radius: 14px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 14px; }
+.step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.step-desc { font-size: 13px; color: var(--text-sub); line-height: 1.55; }
+
+.warn-card { background: var(--red-light); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; border-left: 3px solid var(--red); }
+.warn-title { font-size: 14px; font-weight: 700; color: #9f1239; margin-bottom: 8px; }
+.warn-list { display: flex; flex-direction: column; gap: 6px; }
+.warn-item { font-size: 13px; color: #be123c; line-height: 1.6; display: flex; align-items: flex-start; gap: 8px; }
+.warn-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 8px; }
+
+.info-card { background: var(--green-light); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; border-left: 3px solid var(--green); }
+.info-title { font-size: 14px; font-weight: 700; color: #065f46; margin-bottom: 6px; }
+.info-desc { font-size: 13px; color: #047857; line-height: 1.7; }
+
+.contact-card { background: var(--white); border-radius: 14px; padding: 18px; }
+.contact-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #f5f5f7; }
+.contact-row:last-child { border-bottom: none; }
+.contact-label { font-size: 13px; color: var(--text-hint); }
+.contact-value { font-size: 13px; font-weight: 600; color: var(--text); }
+
+.tab-wrap { display: flex; gap: 6px; margin-bottom: 16px; }
+.tab-btn { flex: 1; padding: 10px; border-radius: 10px; border: none; font-family: 'Pretendard', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; background: var(--white); color: var(--text-hint); }
+.tab-btn.active { background: var(--green); color: #fff; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <svg viewBox="0 0 18 18" fill="none">
+        <path d="M9 2L15 5.5V12.5L9 16L3 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 7V11M7 9H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="header-title">계정 삭제</div>
+      <div class="header-sub">터TOOL</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="hero">
+    <div class="hero-title">계정 삭제 안내</div>
+    <div class="hero-desc">입주민은 앱에서 즉시 삭제되며, 원장은 해지 신청 후 해당 월 말일에 처리됩니다. 삭제된 데이터는 복구할 수 없습니다.</div>
+  </div>
+
+  <div class="warn-card">
+    <div class="warn-title">삭제 시 사라지는 데이터</div>
+    <div class="warn-list">
+      <div class="warn-item"><div class="warn-dot"></div><div>계정 정보 (이름, 이메일, 전화번호 등)</div></div>
+      <div class="warn-item"><div class="warn-dot"></div><div>등록된 고시원 및 입주민 정보</div></div>
+      <div class="warn-item"><div class="warn-dot"></div><div>수납 내역 및 계약서</div></div>
+      <div class="warn-item"><div class="warn-dot"></div><div>메시지 및 민원 기록</div></div>
+      <div class="warn-item"><div class="warn-dot"></div><div>프로 플랜 구독 정보 (환불 불가)</div></div>
+    </div>
+  </div>
+
+  <!-- 탭 -->
+  <div class="tab-wrap">
+    <button class="tab-btn active" onclick="switchTab('owner', this)">원장 회원</button>
+    <button class="tab-btn" onclick="switchTab('resident', this)">입주민 회원</button>
+  </div>
+
+  <!-- 원장 탭 -->
+  <div class="tab-content active" id="tab-owner">
+    <div class="warn-card" style="background:#fff7ed;border-left-color:#f59e0b;">
+      <div class="warn-title" style="color:#92400e">원장 계정 삭제는 신청 후 말일에 처리됩니다</div>
+      <div class="warn-list">
+        <div class="warn-item" style="color:#78350f"><div class="warn-dot" style="background:#f59e0b"></div><div>해지 신청 후 해당 월 말일까지는 서비스를 계속 이용할 수 있습니다</div></div>
+        <div class="warn-item" style="color:#78350f"><div class="warn-dot" style="background:#f59e0b"></div><div>말일 이후 계정과 모든 데이터가 완전히 삭제됩니다</div></div>
+        <div class="warn-item" style="color:#78350f"><div class="warn-dot" style="background:#f59e0b"></div><div>삭제 처리 완료 후 이메일로 안내됩니다</div></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">해지 신청 방법</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">앱 하단 메뉴에서 설정으로 이동</div>
+            <div class="step-desc">터TOOL 원장 앱을 열고 하단 탭에서 설정을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">서비스 해지 신청 선택</div>
+            <div class="step-desc">설정 화면에서 서비스 해지 신청 항목을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">해지 신청 완료</div>
+            <div class="step-desc">신청이 완료되면 해당 월 말일까지 서비스를 이용할 수 있으며, 이후 계정과 데이터가 삭제됩니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-title">프로 플랜 구독 중이라면</div>
+      <div class="info-desc">해지 신청 시 정기 결제가 자동으로 중단됩니다. 잔여 기간에 대한 환불 정책은 이용약관을 참고해주세요.</div>
+    </div>
+  </div>
+
+  <!-- 입주민 탭 -->
+  <div class="tab-content" id="tab-resident">
+    <div class="section">
+      <div class="section-title">삭제 방법</div>
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">앱 하단 메뉴에서 설정으로 이동</div>
+            <div class="step-desc">터TOOL 입주민 앱을 열고 하단 탭에서 설정을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">계정 관리 선택</div>
+            <div class="step-desc">설정 화면에서 계정 관리 항목을 탭합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">계정 삭제 탭</div>
+            <div class="step-desc">계정 삭제 버튼을 탭하고 확인 절차를 진행합니다.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-title">삭제 완료</div>
+            <div class="step-desc">삭제가 완료되면 계정이 즉시 제거됩니다. 고시원 관련 정보는 원장 측에 남을 수 있습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이메일 문의 -->
+  <div class="section">
+    <div class="section-title">앱 접근이 어렵다면</div>
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="contact-label">이메일 문의</span>
+        <span class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc9e909588869f8e9d9297cdcecccfbc929d8a998ed29f9391">[email&#160;protected]</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">처리 기간</span>
+        <span class="contact-value">영업일 기준 3일 이내</span>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-size:13px; color:var(--text-hint); line-height:1.6;">
+      이메일 문의 시 가입한 이메일 주소와 계정 삭제 요청 사유를 함께 보내주세요.
+    </div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classL

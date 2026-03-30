@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>개인정보처리방침 | 터TOOL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green: #3F6B55;
+  --green-light: #f0fdf4;
+  --bg: #f5f5f7;
+  --white: #fff;
+  --text: #1c1c1e;
+  --text-sub: #6e6e73;
+  --text-hint: #8e8e93;
+  --border: #e5e5ea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; max-width: 480px; margin: 0 auto; min-height: 100vh; }
+
+.header { background: var(--white); padding: 18px 20px; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; align-items: center; gap: 10px; }
+.logo { width: 32px; height: 32px; background: var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo svg { width: 18px; height: 18px; }
+.header-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.header-sub { font-size: 12px; color: var(--text-hint); margin-top: 1px; }
+
+.content { padding: 24px 20px 60px; }
+
+.updated { font-size: 12px; color: var(--text-hint); margin-bottom: 20px; }
+
+.intro-box { background: var(--white); border-radius: 14px; padding: 18px; margin-bottom: 20px; border-left: 3px solid var(--green); }
+.intro-box p { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
+
+.section { margin-bottom: 28px; }
+.section-num { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 6px; }
+.section-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+
+.card { background: var(--white); border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
+.card-row { padding: 13px 16px; border-bottom: 1px solid #f5f5f7; }
+.card-row:last-child { border-bottom: none; }
+.card-row-label { font-size: 12px; font-weight: 700; color: var(--text-hint); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 4px; }
+.card-row-value { font-size: 14px; color: var(--text); line-height: 1.6; }
+.card-row-value em { font-style: normal; font-weight: 600; color: var(--green); }
+
+.text-block { font-size: 14px; color: var(--text-sub); line-height: 1.8; margin-bottom: 10px; }
+.text-block strong { color: var(--text); font-weight: 600; }
+
+.sub-section { margin-bottom: 16px; }
+.sub-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+
+.table-wrap { background: var(--white); border-radius: 14px; overflow: hidden; margin-bottom: 10px; }
+.table-head { display: grid; grid-template-columns: 1fr 1fr 1fr; background: #f5f5f7; padding: 10px 14px; }
+.table-head span { font-size: 11px; font-weight: 700; color: var(--text-hint); letter-spacing: .3px; }
+.table-row { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 12px 14px; border-top: 1px solid #f5f5f7; }
+.table-row span { font-size: 13px; color: var(--text); line-height: 1.55; }
+
+.info-box { background: var(--green-light); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.info-box p { font-size: 13px; color: #065f46; line-height: 1.7; }
+.info-box strong { color: #064e3b; }
+
+.warn-box { background: #fff7ed; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.warn-box p { font-size: 13px; color: #92400e; line-height: 1.7; }
+
+.contact-card { background: var(--white); border-radius: 14px; padding: 18px; }
+.contact-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f5f5f7; }
+.contact-row:last-child { border-bottom: none; }
+.contact-label { font-size: 13px; color: var(--text-hint); }
+.contact-value { font-size: 13px; font-weight: 600; color: var(--text); }
+
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <svg viewBox="0 0 18 18" fill="none">
+        <path d="M9 2L15 5.5V12.5L9 16L3 12.5V5.5L9 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M9 7V11M7 9H11" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="header-title">개인정보처리방침</div>
+      <div class="header-sub">터TOOL</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="updated">시행일: 2026년 4월 1일</div>
+
+  <div class="intro-box">
+    <p>김시현(터TOOL, 이하 "서비스")은 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 및 관련 법령을 준수합니다. 본 방침은 서비스가 어떤 개인정보를 수집·이용·보관·파기하는지 안내합니다.</p>
+  </div>
+
+  <!-- 1. 수집하는 개인정보 -->
+  <div class="section">
+    <div class="section-num">Article 01</div>
+    <div class="section-title">수집하는 개인정보 항목 및 수집 방법</div>
+
+    <div class="sub-section">
+      <div class="sub-title">원장(사업자) 회원</div>
+      <div class="table-wrap">
+        <div class="table-head">
+          <span>구분</span><span>수집 항목</span><span>수집 목적</span>
+        </div>
+        <div class="table-row">
+          <span>가입 신청</span>
+          <span>대표자명, 고시원명, 사업자등록번호, 개업일자, 주소, 원장 전화, 고시원 전화, 이메일</span>
+          <span>본인 확인 및 계정 생성</span>
+        </div>
+        <div class="table-row">
+          <span>본인 인증</span>
+          <span>전화번호, OTP</span>
+          <span>가입 및 비밀번호 재설정 인증</span>
+        </div>
+        <div class="table-row">
+          <span>수납 설정</span>
+          <span>은행명, 계좌번호, 예금주</span>
+          <span>자동 수납 처리</span>
+        </div>
+        <div class="table-row">
+          <span>구독 결제</span>
+          <span>카드사, 카드 끝 4자리, 카드 소유자명, 빌링키</span>
+          <span>정기 구독 결제 처리</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">입주민 회원</div>
+      <div class="table-wrap">
+        <div class="table-head">
+          <span>구분</span><span>수집 항목</span><span>수집 목적</span>
+        </div>
+        <div class="table-row">
+          <span>가입 신청</span>
+          <span>이름, 전화번호, 고시원 코드</span>
+          <span>입주민 확인 및 계정 생성</span>
+        </div>
+        <div class="table-row">
+          <span>선택 정보</span>
+          <span>나이, 성별, 보호자 연락처, 주소</span>
+          <span>입주 관리</span>
+        </div>
+        <div class="table-row">
+          <span>본인 인증</span>
+          <span>전화번호, OTP</span>
+          <span>가입 및 비밀번호 재설정 인증</span>
+        </div>
+        <div class="table-row">
+          <span>계약</span>
+          <span>계약서 사진, 계약 내용</span>
+          <span>전자계약 체결 및 보관</span>
+        </div>
+        <div class="table-row">
+          <span>수납</span>
+          <span>입금자명(송금자명), 월세 금액</span>
+          <span>자동 수납 처리</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title">자동 수집 정보</div>
+      <div class="card">
+        <div class="card-row">
+          <div class="card-row-label">푸시 알림 토큰</div>
+          <div class="card-row-value">앱 설치 시 Expo 푸시 토큰이 수집되며, 알림 발송 목적으로만 사용됩니다.</div>
+        </div>
+        <div class="card-row">
+          <div class="card-row-label">입금 알림 데이터</div>
+          <div class="card-row-value">자동 수납 처리를 위해 은행 입금 알림 문자를 수신·파싱하여 입금자명, 금액, 계좌 정보를 처리합니다. 수납 확인 목적으로만 사용됩니다.</div>
+        </div>
+        <div class="card-row">
+          <div class="card-row-label">오류 로그</div>
+          <div class="card-row-value">서비스 안정성 개선을 위해 오류 발생 시 관련 정보가 기록될 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <p><strong>수집 방법:</strong> 회원가입 및 서비스 이용 과정에서 이용자가 직접 입력하거나, 서비스 이용 중 자동으로 생성되는 방식으로 수집합니다.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 2. 이용 목적 -->
+  <div class="section">
+    <div class="section-num">Article 02</div>
+    <div class="section-title">개인정보 이용 목적</div>
+    <div class="card">
+      <div class="card-row">
+        <div class="card-row-label">회원 관리</div>
+        <div class="card-row-value">회원 가입·탈퇴, 본인 확인, 계정 관리, 부정 이용 방지</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">서비스 제공</div>
+        <div class="card-row-value">월세 수납 관리, 입주민 관리, 계약 관리, 민원 처리, 메시지 서비스</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">자동 수납</div>
+        <div class="card-row-value">입금 감지 및 자동 완납 처리, 미납 알림 발송</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">결제 처리</div>
+        <div class="card-row-value">프로 플랜 구독 정기 결제 및 관련 안내</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">고객 지원</div>
+        <div class="card-row-value">문의 응대 및 불만 처리</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">서비스 개선</div>
+        <div class="card-row-value">서비스 품질 향상 및 오류 개선</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 3. 보유 및 이용 기간 -->
+  <div class="section">
+    <div class="section-num">Article 03</div>
+    <div class="section-title">개인정보 보유 및 이용 기간</div>
+    <div class="text-block">원칙적으로 개인정보 수집 목적이 달성되면 즉시 파기합니다. 단, 관련 법령에 따라 아래와 같이 일정 기간 보존합니다.</div>
+    <div class="table-wrap">
+      <div class="table-head">
+        <span>항목</span><span>보유 기간</span><span>근거</span>
+      </div>
+      <div class="table-row">
+        <span>계약·청약 철회 기록</span>
+        <span>5년</span>
+        <span>전자상거래법</span>
+      </div>
+      <div class="table-row">
+        <span>대금 결제·공급 기록</span>
+        <span>5년</span>
+        <span>전자상거래법</span>
+      </div>
+      <div class="table-row">
+        <span>소비자 불만·분쟁 기록</span>
+        <span>3년</span>
+        <span>전자상거래법</span>
+      </div>
+      <div class="table-row">
+        <span>로그인 기록</span>
+        <span>3개월</span>
+        <span>통신비밀보호법</span>
+      </div>
+    </div>
+    <div class="info-box">
+      <p>회원 탈퇴 시 개인정보는 즉시 파기되며, 법령에 따른 보존 의무가 있는 정보는 해당 기간 동안 별도 보관 후 파기됩니다.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 4. 제3자 제공 -->
+  <div class="section">
+    <div class="section-num">Article 04</div>
+    <div class="section-title">개인정보 제3자 제공</div>
+    <div class="text-block">서비스는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다. 다만, 서비스 운영을 위해 아래 업체에 처리를 위탁합니다.</div>
+    <div class="table-wrap">
+      <div class="table-head">
+        <span>수탁 업체</span><span>위탁 업무</span><span>보유 기간</span>
+      </div>
+      <div class="table-row">
+        <span>Supabase Inc.</span>
+        <span>데이터베이스, 인증, 파일 저장</span>
+        <span>회원 탈퇴 시까지</span>
+      </div>
+      <div class="table-row">
+        <span>Expo (Expo Inc.)</span>
+        <span>푸시 알림 발송</span>
+        <span>알림 발송 완료 시까지</span>
+      </div>
+      <div class="table-row">
+        <span>PortOne</span>
+        <span>구독 결제 처리</span>
+        <span>관련 법령에 따름</span>
+      </div>
+      <div class="table-row">
+        <span>Solapi</span>
+        <span>OTP·안내 SMS 발송</span>
+        <span>발송 완료 시까지</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 5. 파기 절차 및 방법 -->
+  <div class="section">
+    <div class="section-num">Article 05</div>
+    <div class="section-title">개인정보 파기 절차 및 방법</div>
+    <div class="card">
+      <div class="card-row">
+        <div class="card-row-label">파기 절차</div>
+        <div class="card-row-value">이용 목적 달성 후 별도 DB에 이관하거나 즉시 파기합니다. 법령에 따른 보존 기간이 경과한 후 파기합니다.</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">파기 방법</div>
+        <div class="card-row-value">전자적 파일: 복구 불가능한 방법으로 영구 삭제<br>종이 문서: 분쇄 또는 소각</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 6. 이용자 권리 -->
+  <div class="section">
+    <div class="section-num">Article 06</div>
+    <div class="section-title">이용자 및 법정대리인의 권리</div>
+    <div class="text-block">이용자는 언제든지 아래 권리를 행사할 수 있습니다.</div>
+    <div class="card">
+      <div class="card-row">
+        <div class="card-row-label">열람 요구</div>
+        <div class="card-row-value">서비스가 보유한 본인의 개인정보 열람을 요청할 수 있습니다.</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">정정·삭제 요구</div>
+        <div class="card-row-value">개인정보가 부정확하거나 불필요한 경우 정정·삭제를 요청할 수 있습니다.</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">처리 정지 요구</div>
+        <div class="card-row-value">개인정보 처리 정지를 요청할 수 있습니다. 단, 법령에 따른 의무 처리는 제외됩니다.</div>
+      </div>
+      <div class="card-row">
+        <div class="card-row-label">계정 삭제</div>
+        <div class="card-row-value">앱 내 설정 화면에서 직접 계정을 삭제할 수 있습니다.</div>
+      </div>
+    </div>
+    <div class="text-block">권리 행사는 아래 개인정보 보호책임자에게 서면, 이메일로 요청하시면 지체 없이 처리합니다.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 7. 쿠키 -->
+  <div class="section">
+    <div class="section-num">Article 07</div>
+    <div class="section-title">쿠키 및 자동 수집 장치</div>
+    <div class="text-block">서비스는 모바일 앱 기반으로 운영되며, 별도의 웹 쿠키는 사용하지 않습니다. 앱 내에서는 로그인 세션 유지를 위한 토큰이 기기에 저장됩니다.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 8. 개인정보 보호책임자 -->
+  <div class="section">
+    <div class="section-num">Article 08</div>
+    <div class="section-title">개인정보 보호책임자</div>
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="contact-label">책임자</span>
+        <span class="contact-value">김시현</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">사업자등록번호</span>
+        <span class="contact-value">555-08-03217</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">이메일</span>
+        <span class="contact-value">blitzcrank1203@naver.com</span>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:10px">
+      <p>개인정보 관련 불만이나 피해 구제는 아래 기관에도 신청할 수 있습니다.<br>
+      <strong>개인정보보호위원회:</strong> privacy.go.kr / 국번 없이 182<br>
+      <strong>개인정보침해신고센터:</strong> privacy.kisa.or.kr / 국번 없이 118</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 9. 개정 -->
+  <div class="section">
+    <div class="section-num">Article 09</div>
+    <div class="section-title">개인정보처리방침 변경</div>
+    <div class="text-block">본 방침이 변경될 경우 앱 내 공지사항 또는 이 페이지를 통해 사전에 안내합니다. 변경된 방침은 공지한 날로부터 7일 후 효력이 발생합니다.</div>
+    <div class="text-block">최초 시행일: 2026년 4월 1일</div>
+  </div>
+
+</div>
+</body>
+</html>
