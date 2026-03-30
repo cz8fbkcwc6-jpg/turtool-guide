@@ -61,6 +61,8 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(
 .contact-row:last-child { border-bottom: none; }
 .contact-label { font-size: 13px; color: var(--text-hint); }
 .contact-value { font-size: 13px; font-weight: 600; color: var(--text); }
+.contact-value a { color: var(--text); text-decoration: none; }
+.contact-value a:hover { text-decoration: underline; }
 
 .tab-wrap { display: flex; gap: 6px; margin-bottom: 16px; }
 .tab-btn { flex: 1; padding: 10px; border-radius: 10px; border: none; font-family: 'Pretendard', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; background: var(--white); color: var(--text-hint); }
@@ -105,13 +107,11 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(
     </div>
   </div>
 
-  <!-- 탭 -->
   <div class="tab-wrap">
     <button class="tab-btn active" onclick="switchTab('owner', this)">원장 회원</button>
     <button class="tab-btn" onclick="switchTab('resident', this)">입주민 회원</button>
   </div>
 
-  <!-- 원장 탭 -->
   <div class="tab-content active" id="tab-owner">
     <div class="warn-card" style="background:#fff7ed;border-left-color:#f59e0b;">
       <div class="warn-title" style="color:#92400e">원장 계정 삭제는 신청 후 말일에 처리됩니다</div>
@@ -147,14 +147,12 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(
         </div>
       </div>
     </div>
-
     <div class="info-card">
       <div class="info-title">프로 플랜 구독 중이라면</div>
       <div class="info-desc">해지 신청 시 정기 결제가 자동으로 중단됩니다. 잔여 기간에 대한 환불 정책은 이용약관을 참고해주세요.</div>
     </div>
   </div>
 
-  <!-- 입주민 탭 -->
   <div class="tab-content" id="tab-resident">
     <div class="section">
       <div class="section-title">삭제 방법</div>
@@ -191,13 +189,12 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(
     </div>
   </div>
 
-  <!-- 이메일 문의 -->
   <div class="section">
     <div class="section-title">앱 접근이 어렵다면</div>
     <div class="contact-card">
       <div class="contact-row">
         <span class="contact-label">이메일 문의</span>
-        <span class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc9e909588869f8e9d9297cdcecccfbc929d8a998ed29f9391">[email&#160;protected]</a></span>
+        <span class="contact-value"><a href="mailto:blitzcrank1203@naver.com">blitzcrank1203@naver.com</a></span>
       </div>
       <div class="contact-row">
         <span class="contact-label">처리 기간</span>
@@ -205,12 +202,19 @@ body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(
       </div>
     </div>
     <div style="margin-top:10px; font-size:13px; color:var(--text-hint); line-height:1.6;">
-      이메일 문의 시 가입한 이메일 주소와 계정 삭제 요청 사유를 함께 보내주세요.
+      이메일 문의 시 가입한 전화번호와 계정 삭제 요청 사유를 함께 보내주세요.
     </div>
   </div>
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function switchTab(tab, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classL
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+</script>
+</body>
+</html>
