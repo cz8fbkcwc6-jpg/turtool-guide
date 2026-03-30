@@ -5,81 +5,238 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>수납 가이드 | 터TOOL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-height:1.5;max-width:480px;margin:0 auto;min-height:100vh}
+:root {
+  --green: #3F6B55;
+  --green-light: #f0fdf4;
+  --green-mid: #c5ddd0;
+  --green-dark: #2e5040;
+  --bg: #f5f5f7;
+  --white: #fff;
+  --text: #1c1c1e;
+  --text-sub: #6e6e73;
+  --text-hint: #8e8e93;
+  --border: #e5e5ea;
+  --border-light: #f5f5f7;
+}
 
-.header{background:#fff;padding:20px 20px 0;position:sticky;top:0;z-index:100;border-bottom:1px solid #f0f0f0}
-.header-top{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.logo{width:32px;height:32px;background:#3F6B55;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.logo svg{width:18px;height:18px}
-.header-title{font-size:16px;font-weight:700;color:#1c1c1e}
-.header-sub{font-size:12px;color:#8e8e93;margin-top:1px}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Pretendard', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; max-width: 480px; margin: 0 auto; min-height: 100vh; }
 
-.plan-tabs{display:flex;border-bottom:1px solid #f0f0f0}
-.plan-tab{flex:1;padding:13px 0;font-size:14px;font-weight:500;color:#8e8e93;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
-.plan-tab.active{color:#3F6B55;font-weight:700;border-bottom-color:#3F6B55}
+/* ─── HEADER ─── */
+.header {
+  background: var(--white);
+  padding: 18px 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #f0f0f0;
+}
+.header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.logo { width: 32px; height: 32px; background: var(--green); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo svg { width: 18px; height: 18px; }
+.header-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.header-sub { font-size: 12px; color: var(--text-hint); margin-top: 1px; }
 
-.sub-tabs{display:flex;overflow-x:auto;scrollbar-width:none;background:#fff;border-bottom:1px solid #f0f0f0}
-.sub-tabs::-webkit-scrollbar{display:none}
-.sub-tab{flex-shrink:0;padding:11px 16px;font-size:13px;font-weight:500;color:#8e8e93;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
-.sub-tab.active{color:#3F6B55;font-weight:600;border-bottom-color:#3F6B55}
+/* ─── PLAN TABS (상단 큰 탭) ─── */
+.plan-tabs { display: flex; gap: 6px; padding: 0 0 14px; }
+.plan-tab {
+  flex: 1; padding: 10px 0; font-size: 14px; font-weight: 600;
+  color: var(--text-hint); background: var(--bg); border: none;
+  border-radius: 10px; cursor: pointer; transition: all .2s;
+  font-family: 'Pretendard', sans-serif;
+}
+.plan-tab.active { background: var(--green); color: #fff; font-weight: 700; }
 
-.plan-page{display:none}
-.plan-page.active{display:block}
-.sub-page{display:none}
-.sub-page.active{display:block}
-.section{padding:20px}
+/* ─── SUB TABS ─── */
+.sub-tabs-wrap {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 106px;
+  z-index: 90;
+}
+.sub-tabs { display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 16px; }
+.sub-tabs::-webkit-scrollbar { display: none; }
+.sub-tab {
+  flex-shrink: 0; padding: 12px 14px; font-size: 13px; font-weight: 500;
+  color: var(--text-hint); border: none; background: none; cursor: pointer;
+  border-bottom: 2px solid transparent; white-space: nowrap;
+  transition: all .2s; font-family: 'Pretendard', sans-serif;
+}
+.sub-tab.active { color: var(--green); font-weight: 700; border-bottom-color: var(--green); }
 
-.sec-label{font-size:11px;font-weight:700;color:#8e8e93;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+/* ─── PAGES ─── */
+.plan-page { display: none; }
+.plan-page.active { display: block; }
+.sub-page { display: none; animation: fadeUp .25s ease; }
+.sub-page.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-.highlight{background:#f0f7f3;border-radius:14px;padding:16px;margin-bottom:12px}
-.highlight-title{font-size:14px;font-weight:700;color:#1c1c1e;margin-bottom:10px}
-.highlight-item{font-size:13px;color:#2d5040;padding-left:14px;position:relative;line-height:1.65;margin-bottom:6px}
-.highlight-item:last-child{margin-bottom:0}
-.highlight-item::before{content:'·';position:absolute;left:0;line-height:1.3;font-size:18px;font-weight:900}
+.section { padding: 20px 20px 0; }
 
-.card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px}
-.card-item{padding:15px 16px;border-bottom:1px solid #f5f5f7}
-.card-item:last-child{border-bottom:none}
-.card-title{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:4px}
-.card-desc{font-size:13px;color:#6e6e73;line-height:1.65}
-.card-desc em{font-style:normal;font-weight:600;color:#3F6B55}
+/* ─── 플랜 히어로 배너 ─── */
+.plan-hero {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+  border-radius: 18px; padding: 22px 20px; margin-bottom: 14px;
+}
+.plan-hero-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,.18); border-radius: 20px;
+  padding: 4px 10px; margin-bottom: 12px;
+  font-size: 11px; font-weight: 700; color: rgba(255,255,255,.9); letter-spacing: .4px;
+}
+.plan-hero h2 { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.35; }
+.plan-hero p { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.6; }
 
-.notice{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;border:1px solid #e5e5ea}
-.notice-title{font-size:14px;font-weight:700;color:#1c1c1e;margin-bottom:5px}
-.notice-desc{font-size:13px;color:#6e6e73;line-height:1.65}
+/* ─── 기능 목록 (히어로 내부) ─── */
+.feature-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.feature-item { display: flex; align-items: center; gap: 10px; }
+.feature-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.feature-check svg { width: 11px; height: 11px; }
+.feature-text { font-size: 13px; color: rgba(255,255,255,.9); font-weight: 500; }
 
-.step-list{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:12px}
-.step-item{display:flex;align-items:flex-start;gap:14px;padding:15px 16px;border-bottom:1px solid #f5f5f7}
-.step-item:last-child{border-bottom:none}
-.step-num{width:26px;height:26px;border-radius:50%;background:#3F6B55;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.step-title{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:3px}
-.step-desc{font-size:13px;color:#6e6e73;line-height:1.55}
-.step-desc em{font-style:normal;font-weight:600;color:#3F6B55}
+/* ─── 섹션 레이블 ─── */
+.sec-label {
+  font-size: 11px; font-weight: 700; color: var(--text-hint);
+  letter-spacing: .6px; text-transform: uppercase; margin-bottom: 10px;
+}
 
-.flow{background:#fff;border-radius:16px;padding:18px;margin-bottom:12px}
-.flow-step{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid #f5f5f7}
-.flow-step:last-child{border-bottom:none;padding-bottom:0}
-.flow-num{width:26px;height:26px;border-radius:50%;background:#3F6B55;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.flow-name{font-size:14px;font-weight:600;color:#1c1c1e;margin-bottom:2px}
-.flow-desc{font-size:13px;color:#6e6e73;line-height:1.55}
-.auto-tag{display:inline-block;background:#f0f7f3;color:#3F6B55;font-size:10px;font-weight:700;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle;letter-spacing:.2px}
+/* ─── 인포 카드 (notice 대체) ─── */
+.info-card {
+  background: var(--white); border-radius: 16px; padding: 16px 18px;
+  margin-bottom: 14px; border-left: 3px solid var(--green);
+}
+.info-card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+.info-card-desc { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+.info-card-desc strong { color: var(--text); font-weight: 600; }
 
-.calc{background:#f5f5f7;border-radius:12px;padding:14px;margin-top:10px}
-.calc-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #e5e5ea}
-.calc-row:last-child{border-bottom:none;padding-top:10px;margin-top:2px}
-.calc-label{font-size:13px;color:#6e6e73}
-.calc-value{font-size:13px;font-weight:600;color:#1c1c1e}
-.calc-total .calc-label{font-weight:700;color:#1c1c1e}
-.calc-total .calc-value{color:#3F6B55;font-size:15px}
+/* ─── 경고 카드 ─── */
+.warn-card {
+  background: #fff7ed; border-radius: 16px; padding: 16px 18px;
+  margin-bottom: 14px; border-left: 3px solid #f59e0b;
+}
+.warn-card-title { font-size: 14px; font-weight: 700; color: #92400e; margin-bottom: 5px; }
+.warn-card-desc { font-size: 13px; color: #78350f; line-height: 1.7; }
 
-.bottom-space{height:40px}
+/* ─── 화면 구성 카드 그리드 ─── */
+.screen-grid { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.screen-card {
+  background: var(--white); border-radius: 14px; padding: 15px 16px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.screen-card-icon {
+  width: 38px; height: 38px; border-radius: 10px; background: var(--green-light);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.screen-card-icon svg { width: 18px; height: 18px; }
+.screen-card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.screen-card-desc { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+.screen-card-desc em { font-style: normal; font-weight: 600; color: var(--green); }
+
+/* ─── 흐름 타임라인 ─── */
+.timeline { margin-bottom: 14px; }
+.tl-item { display: flex; gap: 14px; position: relative; }
+.tl-item:not(:last-child)::after {
+  content: ''; position: absolute;
+  left: 15px; top: 32px; bottom: -4px;
+  width: 1.5px; background: var(--green-mid);
+}
+.tl-left { display: flex; flex-direction: column; align-items: center; }
+.tl-num {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--green);
+  color: #fff; font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.tl-body { background: var(--white); border-radius: 14px; padding: 14px 16px; flex: 1; margin-bottom: 8px; }
+.tl-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.tl-desc { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+.auto-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: var(--green-light); color: var(--green);
+  font-size: 10px; font-weight: 700; border-radius: 5px;
+  padding: 2px 7px; letter-spacing: .2px; white-space: nowrap;
+}
+.once-badge {
+  display: inline-flex; align-items: center;
+  background: #eff6ff; color: #3b82f6;
+  font-size: 10px; font-weight: 700; border-radius: 5px;
+  padding: 2px 7px; letter-spacing: .2px; white-space: nowrap;
+}
+
+/* ─── 스텝 리스트 ─── */
+.step-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.step-item {
+  background: var(--white); border-radius: 14px; padding: 14px 16px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--green);
+  color: #fff; font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.step-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.step-desc { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+.step-desc em { font-style: normal; font-weight: 600; color: var(--green); }
+
+/* ─── 그룹 제목 (스텝 섹션 구분) ─── */
+.group-title {
+  font-size: 13px; font-weight: 700; color: var(--text);
+  margin: 16px 0 8px; display: flex; align-items: center; gap: 8px;
+}
+.group-title::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+
+/* ─── 차액 계산기 ─── */
+.calc-card { background: var(--white); border-radius: 16px; overflow: hidden; margin-bottom: 14px; }
+.calc-head { background: var(--green); padding: 14px 18px; }
+.calc-head-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.calc-head-desc { font-size: 12px; color: rgba(255,255,255,.75); line-height: 1.5; }
+.calc-body { padding: 16px 18px; }
+.calc-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border-light); }
+.calc-row:last-child { border-bottom: none; padding-bottom: 0; }
+.calc-label { font-size: 13px; color: var(--text-sub); }
+.calc-value { font-size: 13px; font-weight: 600; color: var(--text); }
+.calc-total .calc-label { font-size: 14px; font-weight: 700; color: var(--text); }
+.calc-total .calc-value { font-size: 16px; font-weight: 800; color: var(--green); }
+
+/* ─── 기능 비교 카드 ─── */
+.compare-card {
+  background: var(--white); border-radius: 16px; padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.compare-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border-light); }
+.compare-row:last-child { border-bottom: none; padding-bottom: 0; }
+.compare-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.compare-icon.on { background: var(--green-light); }
+.compare-icon.off { background: #f5f5f7; }
+.compare-icon svg { width: 14px; height: 14px; }
+.compare-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.compare-text span { font-size: 13px; color: var(--text-sub); line-height: 1.55; }
+
+/* ─── 업그레이드 배너 ─── */
+.upgrade-banner {
+  background: linear-gradient(135deg, #1c1c1e 0%, #3d3d3d 100%);
+  border-radius: 16px; padding: 18px 20px; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.upgrade-text strong { display: block; font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.upgrade-text span { font-size: 12px; color: rgba(255,255,255,.6); line-height: 1.5; }
+.upgrade-btn {
+  background: var(--green); color: #fff; border: none; border-radius: 10px;
+  padding: 9px 14px; font-size: 12px; font-weight: 700;
+  font-family: 'Pretendard', sans-serif; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+}
+
+.bottom-space { height: 40px; }
 </style>
 </head>
 <body>
 
+<!-- ─── HEADER ─── -->
 <div class="header">
   <div class="header-top">
     <div class="logo">
@@ -94,92 +251,139 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
     </div>
   </div>
   <div class="plan-tabs">
-    <button class="plan-tab active" onclick="selectPlan('pro',this)">프로 플랜</button>
-    <button class="plan-tab" onclick="selectPlan('basic',this)">베이직 플랜</button>
+    <button class="plan-tab active" onclick="selectPlan('pro', this)">프로 플랜</button>
+    <button class="plan-tab" onclick="selectPlan('basic', this)">베이직 플랜</button>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════ -->
 <!-- 프로 플랜 -->
+<!-- ══════════════════════════════════════ -->
 <div class="plan-page active" id="plan-pro">
-  <div class="sub-tabs" id="subtabs-pro">
-    <button class="sub-tab active" onclick="selectSub('pro','overview',this)">개요</button>
-    <button class="sub-tab" onclick="selectSub('pro','flow',this)">자동화 흐름</button>
-    <button class="sub-tab" onclick="selectSub('pro','sender',this)">송금자명 등록</button>
-    <button class="sub-tab" onclick="selectSub('pro','unmatched',this)">미확인 입금</button>
-    <button class="sub-tab" onclick="selectSub('pro','manual',this)">수동 처리</button>
-    <button class="sub-tab" onclick="selectSub('pro','notice',this)">미납 알림</button>
-    <button class="sub-tab" onclick="selectSub('pro','diff',this)">차액 계산기</button>
+  <div class="sub-tabs-wrap">
+    <div class="sub-tabs" id="subtabs-pro">
+      <button class="sub-tab active" onclick="selectSub('pro','overview',this)">개요</button>
+      <button class="sub-tab" onclick="selectSub('pro','flow',this)">자동화 흐름</button>
+      <button class="sub-tab" onclick="selectSub('pro','sender',this)">송금자명 등록</button>
+      <button class="sub-tab" onclick="selectSub('pro','unmatched',this)">미확인 입금</button>
+      <button class="sub-tab" onclick="selectSub('pro','manual',this)">수동 처리</button>
+      <button class="sub-tab" onclick="selectSub('pro','notice',this)">미납 알림</button>
+      <button class="sub-tab" onclick="selectSub('pro','diff',this)">차액 계산기</button>
+    </div>
   </div>
 
+  <!-- 개요 -->
   <div class="sub-page active" id="pro-overview">
     <div class="section">
-      <div class="highlight">
-        <div class="highlight-title">프로 플랜에서 자동으로 처리되는 것들</div>
-        <div class="highlight-item">입주민 입금 감지 및 수납 자동 완납 처리</div>
-        <div class="highlight-item">입금자명으로 어떤 입주민인지 자동 매칭</div>
-        <div class="highlight-item">다음 달 수납 스케줄 자동 생성</div>
-        <div class="highlight-item">미납 시 지정한 날짜에 독촉 알림 자동 발송</div>
+      <div style="height:20px"></div>
+      <div class="plan-hero">
+        <div class="plan-hero-badge">
+          <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M6 1L7.5 4.5H11L8.5 6.5L9.5 10L6 8L2.5 10L3.5 6.5L1 4.5H4.5L6 1Z" fill="rgba(255,255,255,0.9)"/></svg>
+          PRO
+        </div>
+        <h2>월세 수납을 자동으로<br>처리해드립니다</h2>
+        <p>입주민이 입금하면 터TOOL이 감지해 즉시 수납을 완료합니다. 직접 확인하고 기록할 필요가 없어요.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">입금 감지 후 자동 완납 처리</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">입금자명으로 입주민 자동 매칭</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">다음 달 수납 스케줄 자동 생성</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">미납 시 지정일에 독촉 알림 자동 발송</div>
+          </div>
+        </div>
       </div>
-      <div class="notice">
-        <div class="notice-title">자동 수납 시작 전 필요한 설정</div>
-        <div class="notice-desc">수납 계좌 등록 — 알림번호 등록 — 입주민 송금자명 등록 순서로 설정해야 자동 수납이 정상 작동합니다.</div>
+
+      <div class="info-card">
+        <div class="info-card-title">자동 수납 전 필요한 설정 순서</div>
+        <div class="info-card-desc">
+          <strong>수납 계좌 등록</strong> → <strong>알림번호 등록</strong> → <strong>입주민 송금자명 등록</strong><br>
+          이 순서대로 설정해야 자동 수납이 정상 작동합니다.
+        </div>
       </div>
+
       <div class="sec-label">수납 화면 구성</div>
-      <div class="card">
-        <div class="card-item">
-          <div class="card-title">월별 수납 현황 카드</div>
-          <div class="card-desc">상단 카드에서 이번 달 완납 · 미납 · 부분납 인원을 확인할 수 있습니다. 좌우 스와이프로 다른 달을 조회할 수 있어요.</div>
+      <div class="screen-grid">
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#3F6B55" stroke-width="1.4"/><path d="M5 8h8M5 11h5" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">월별 수납 현황 카드</div>
+            <div class="screen-card-desc">이번 달 완납·미납·부분납 인원을 한눈에 확인할 수 있습니다. 좌우로 스와이프하면 다른 달을 조회할 수 있어요.</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">미확인 입금 카드</div>
-          <div class="card-desc">입금자명이 등록된 송금자명과 다를 경우 미확인 입금으로 분류됩니다. 직접 입주민과 연결하거나 삭제할 수 있어요.</div>
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6" stroke="#3F6B55" stroke-width="1.4"/><path d="M9 6v3l2 2" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">미확인 입금 카드</div>
+            <div class="screen-card-desc">입금자명이 등록된 송금자명과 다를 경우 여기에 표시됩니다. <em>입주민과 직접 연결</em>하거나 삭제할 수 있어요.</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">입주민 목록</div>
-          <div class="card-desc">전체 · 미납 · 완납 · 부분납 필터로 입주민별 납부 상태를 확인하고 상세 처리를 할 수 있습니다.</div>
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h8" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">입주민 목록</div>
+            <div class="screen-card-desc">전체·미납·완납·부분납 필터로 납부 상태를 빠르게 확인하고 개별 처리를 할 수 있습니다.</div>
+          </div>
         </div>
       </div>
       <div class="bottom-space"></div>
     </div>
   </div>
 
+  <!-- 자동화 흐름 -->
   <div class="sub-page" id="pro-flow">
     <div class="section">
+      <div style="height:20px"></div>
       <div class="sec-label">자동 수납 전체 흐름</div>
-      <div class="flow">
-        <div class="flow-step">
-          <div class="flow-num">1</div>
-          <div>
-            <div class="flow-name">수납 계좌 등록</div>
-            <div class="flow-desc">수납 설정에서 월세를 받을 계좌의 은행명, 계좌번호, 예금주를 등록합니다.</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">1</div></div>
+          <div class="tl-body">
+            <div class="tl-name">수납 계좌 등록</div>
+            <div class="tl-desc">수납 설정에서 월세 받을 계좌의 은행명, 계좌번호, 예금주를 등록합니다.</div>
           </div>
         </div>
-        <div class="flow-step">
-          <div class="flow-num">2</div>
-          <div>
-            <div class="flow-name">알림번호 등록 <span class="auto-tag">1회 설정</span></div>
-            <div class="flow-desc">터TOOL 알림번호를 은행 앱의 입금 알림번호로 등록합니다. 은행별 방법은 알림번호 설정 가이드를 참고하세요.</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">2</div></div>
+          <div class="tl-body">
+            <div class="tl-name">알림번호 등록 <span class="once-badge">1회 설정</span></div>
+            <div class="tl-desc">터TOOL 알림번호를 은행 앱의 입금 알림번호로 등록합니다. 은행별 설정 방법은 알림번호 설정 가이드를 참고하세요.</div>
           </div>
         </div>
-        <div class="flow-step">
-          <div class="flow-num">3</div>
-          <div>
-            <div class="flow-name">입주민 송금자명 등록</div>
-            <div class="flow-desc">각 입주민이 입금할 때 사용하는 이름을 터TOOL에 등록합니다. 이름이 일치해야 자동으로 누구의 수납인지 식별할 수 있어요.</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">3</div></div>
+          <div class="tl-body">
+            <div class="tl-name">입주민 송금자명 등록</div>
+            <div class="tl-desc">각 입주민이 입금할 때 사용하는 이름을 터TOOL에 등록합니다. 은행에 표시되는 이름과 정확히 일치해야 자동으로 누구의 수납인지 식별합니다.</div>
           </div>
         </div>
-        <div class="flow-step">
-          <div class="flow-num">4</div>
-          <div>
-            <div class="flow-name">입주민 입금 감지 <span class="auto-tag">자동</span></div>
-            <div class="flow-desc">입주민이 계좌로 입금하면 터TOOL이 자동으로 감지합니다.</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">4</div></div>
+          <div class="tl-body">
+            <div class="tl-name">입주민 입금 감지 <span class="auto-badge">자동</span></div>
+            <div class="tl-desc">입주민이 계좌로 입금하면 터TOOL이 실시간으로 감지합니다.</div>
           </div>
         </div>
-        <div class="flow-step">
-          <div class="flow-num">5</div>
-          <div>
-            <div class="flow-name">자동 완납 처리 <span class="auto-tag">자동</span></div>
-            <div class="flow-desc">등록된 송금자명과 입금자명이 일치하면 즉시 완납으로 처리되고, 원장님 앱으로 알림이 발송됩니다.</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-num">5</div></div>
+          <div class="tl-body">
+            <div class="tl-name">자동 완납 처리 <span class="auto-badge">자동</span></div>
+            <div class="tl-desc">등록된 송금자명과 입금자명이 일치하면 즉시 완납으로 처리되고 원장님 앱으로 알림이 발송됩니다.</div>
           </div>
         </div>
       </div>
@@ -187,26 +391,29 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
     </div>
   </div>
 
+  <!-- 송금자명 등록 -->
   <div class="sub-page" id="pro-sender">
     <div class="section">
-      <div class="notice">
-        <div class="notice-title">입금자명으로 입주민을 식별합니다</div>
-        <div class="notice-desc">은행 입금 시 표시되는 이름과 터TOOL에 등록된 송금자명이 일치해야 자동으로 해당 입주민의 수납으로 처리됩니다. 이름이 다르면 미확인 입금으로 분류됩니다.</div>
+      <div style="height:20px"></div>
+      <div class="info-card">
+        <div class="info-card-title">입금자명으로 입주민을 식별합니다</div>
+        <div class="info-card-desc">입금 시 표시되는 이름과 터TOOL에 등록된 <strong>송금자명이 일치</strong>해야 해당 입주민의 수납으로 자동 처리됩니다. 이름이 다르면 미확인 입금으로 분류됩니다.</div>
       </div>
+
       <div class="sec-label">등록 방법</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
           <div>
             <div class="step-title">수납 탭 하단 입주민 목록에서 선택</div>
-            <div class="step-desc">처리할 입주민 행을 탭합니다.</div>
+            <div class="step-desc">송금자명을 등록할 입주민 행을 탭합니다.</div>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">2</div>
           <div>
             <div class="step-title">송금자명 입력</div>
-            <div class="step-desc">입주민이 입금 시 실제로 사용하는 이름을 입력합니다. 은행 계좌에 표시되는 이름과 정확히 일치해야 합니다.</div>
+            <div class="step-desc">입주민이 입금할 때 실제로 사용하는 이름을 입력합니다. 은행 계좌에 표시되는 이름과 <em>정확히 일치</em>해야 합니다.</div>
           </div>
         </div>
         <div class="step-item">
@@ -217,27 +424,41 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
           </div>
         </div>
       </div>
-      <div class="notice">
-        <div class="notice-title">동명이인이 있다면</div>
-        <div class="notice-desc">같은 이름의 입주민이 여러 명인 경우 송금자명을 다르게 설정하도록 안내해주세요. 예를 들어 홍길동이 두 명이라면 홍길동101, 홍길동202처럼 구분해서 등록하면 됩니다.</div>
+
+      <div class="warn-card">
+        <div class="warn-card-title">동명이인이 있다면</div>
+        <div class="warn-card-desc">같은 이름의 입주민이 여러 명이라면 송금자명을 다르게 설정하도록 안내해주세요.<br>예) 홍길동이 두 명 → <strong>홍길동101</strong>, <strong>홍길동202</strong>처럼 구분</div>
       </div>
       <div class="bottom-space"></div>
     </div>
   </div>
 
+  <!-- 미확인 입금 -->
   <div class="sub-page" id="pro-unmatched">
     <div class="section">
+      <div style="height:20px"></div>
       <div class="sec-label">미확인 입금이 생기는 경우</div>
-      <div class="card">
-        <div class="card-item">
-          <div class="card-title">입금자명이 다를 때</div>
-          <div class="card-desc">입주민이 다른 이름으로 입금하거나 송금자명이 등록되지 않은 경우 <em>미확인 입금</em>으로 분류됩니다.</div>
+      <div class="screen-grid">
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6" stroke="#3F6B55" stroke-width="1.4"/><path d="M9 6.5v3" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/><circle cx="9" cy="12" r=".8" fill="#3F6B55"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">입금자명이 다를 때</div>
+            <div class="screen-card-desc">입주민이 다른 이름으로 입금하거나 송금자명이 미등록된 경우 미확인 입금으로 분류됩니다.</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">테스트 입금을 했을 때</div>
-          <div class="card-desc">알림번호 등록 테스트 시 보낸 소액 입금이 미확인 입금으로 표시될 수 있습니다. 삭제하면 됩니다.</div>
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M9 3v6M6 6l3-3 3 3" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h10a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1Z" stroke="#3F6B55" stroke-width="1.4"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">테스트 입금을 했을 때</div>
+            <div class="screen-card-desc">알림번호 등록 테스트 시 보낸 소액 입금이 미확인 입금으로 표시될 수 있습니다. 삭제하면 됩니다.</div>
+          </div>
         </div>
       </div>
+
       <div class="sec-label">처리 방법</div>
       <div class="step-list">
         <div class="step-item">
@@ -251,7 +472,7 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
           <div class="step-num">2</div>
           <div>
             <div class="step-title">연결 또는 삭제 선택</div>
-            <div class="step-desc"><em>입주민과 연결하기</em>를 선택하면 어떤 입주민의 수납으로 처리할지 선택할 수 있습니다. 무관한 입금이라면 <em>삭제하기</em>로 제거하면 됩니다.</div>
+            <div class="step-desc"><em>입주민과 연결하기</em>를 선택하면 어떤 입주민의 수납으로 처리할지 지정할 수 있습니다. 관련 없는 입금이라면 <em>삭제하기</em>로 제거합니다.</div>
           </div>
         </div>
       </div>
@@ -259,9 +480,11 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
     </div>
   </div>
 
+  <!-- 수동 처리 -->
   <div class="sub-page" id="pro-manual">
     <div class="section">
-      <div class="sec-label">완납 처리하기</div>
+      <div style="height:20px"></div>
+      <div class="group-title">완납 처리</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
@@ -273,12 +496,13 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
         <div class="step-item">
           <div class="step-num">2</div>
           <div>
-            <div class="step-title">완납 처리</div>
-            <div class="step-desc">상세 화면에서 완납 처리 버튼을 탭합니다.</div>
+            <div class="step-title">완납 처리 버튼 탭</div>
+            <div class="step-desc">상세 화면에서 완납 처리 버튼을 탭하면 완납 날짜가 자동으로 기록됩니다.</div>
           </div>
         </div>
       </div>
-      <div class="sec-label">부분납 처리하기</div>
+
+      <div class="group-title">부분납 처리</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
@@ -295,40 +519,54 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
           </div>
         </div>
       </div>
-      <div class="notice">
-        <div class="notice-title">잘못 처리했다면</div>
-        <div class="notice-desc">입주민 상세 화면에서 수납 취소를 통해 되돌릴 수 있습니다.</div>
+
+      <div class="info-card">
+        <div class="info-card-title">잘못 처리했다면</div>
+        <div class="info-card-desc">입주민 상세 화면에서 <strong>수납 취소</strong>를 통해 이전 상태로 되돌릴 수 있습니다.</div>
       </div>
       <div class="bottom-space"></div>
     </div>
   </div>
 
+  <!-- 미납 알림 -->
   <div class="sub-page" id="pro-notice">
     <div class="section">
-      <div class="sec-label">자동 독촉 알림</div>
-      <div class="card">
-        <div class="card-item">
-          <div class="card-title">발송 시점 설정</div>
-          <div class="card-desc">수납 설정에서 납부일 이후 며칠째에 독촉 알림을 보낼지 설정할 수 있습니다. 설정한 날짜에 미납 입주민에게 자동으로 알림이 발송됩니다.</div>
+      <div style="height:20px"></div>
+      <div class="group-title">자동 독촉 알림</div>
+      <div class="screen-grid">
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6" stroke="#3F6B55" stroke-width="1.4"/><path d="M9 6v3l2 1.5" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">발송 시점 설정</div>
+            <div class="screen-card-desc">수납 설정에서 납부일 이후 며칠째에 독촉 알림을 보낼지 지정할 수 있습니다. 설정한 날에 미납 입주민에게 자동 발송됩니다.</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">알림 내용</div>
-          <div class="card-desc">입주민 앱으로 미납 알림이 발송됩니다. 미납 경과 일수와 납부 금액이 함께 표시됩니다.</div>
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M9 3a4 4 0 0 1 4 4c0 2 .8 3 1.2 3.5H3.8C4.2 10 5 9 5 7a4 4 0 0 1 4-4Z" stroke="#3F6B55" stroke-width="1.4"/><path d="M7 13a2 2 0 0 0 4 0" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">알림 내용</div>
+            <div class="screen-card-desc">입주민 앱으로 미납 알림이 발송됩니다. 미납 경과 일수와 납부 금액이 함께 표시됩니다.</div>
+          </div>
         </div>
       </div>
-      <div class="sec-label">수동 독촉 알림</div>
+
+      <div class="group-title">수동 독촉 알림</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
           <div>
-            <div class="step-title">입주민 상세 화면으로 이동</div>
+            <div class="step-title">미납 입주민 상세 화면으로 이동</div>
             <div class="step-desc">수납 화면 하단 목록에서 미납 입주민을 탭합니다.</div>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">2</div>
           <div>
-            <div class="step-title">독촉 알림 전송</div>
+            <div class="step-title">독촉 알림 즉시 전송</div>
             <div class="step-desc">상세 화면에서 독촉 알림 버튼을 탭하면 즉시 해당 입주민 앱으로 알림이 발송됩니다.</div>
           </div>
         </div>
@@ -337,30 +575,47 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
     </div>
   </div>
 
+  <!-- 차액 계산기 -->
   <div class="sub-page" id="pro-diff">
     <div class="section">
-      <div class="notice">
-        <div class="notice-title">방 변경 시 월세 차액을 자동으로 계산합니다</div>
-        <div class="notice-desc">터 관리 메뉴에서 입주민의 방을 변경하면, 이전 방과 새 방의 월세 차이를 기준으로 당월 일할 차액이 자동으로 계산됩니다.</div>
+      <div style="height:20px"></div>
+      <div class="info-card">
+        <div class="info-card-title">방 변경 시 월세 차액을 자동 계산합니다</div>
+        <div class="info-card-desc">터 관리 메뉴에서 입주민의 방을 변경하면 이전 방과 새 방의 월세 차이를 기준으로 <strong>당월 일할 차액</strong>이 자동으로 계산됩니다.</div>
       </div>
-      <div class="sec-label">예시</div>
-      <div class="card" style="padding:16px;border-radius:16px">
-        <div style="font-size:13px;color:#6e6e73;margin-bottom:12px;line-height:1.6">월 중간(15일)에 400,000원짜리 방에서 500,000원짜리 방으로 이동한 경우</div>
-        <div class="calc">
+
+      <div class="sec-label">계산 예시</div>
+      <div class="calc-card">
+        <div class="calc-head">
+          <div class="calc-head-title">월 중간 방 이동 시나리오</div>
+          <div class="calc-head-desc">15일에 400,000원 → 500,000원 방으로 이동한 경우</div>
+        </div>
+        <div class="calc-body">
           <div class="calc-row"><span class="calc-label">이전 방 월세</span><span class="calc-value">400,000원</span></div>
           <div class="calc-row"><span class="calc-label">새 방 월세</span><span class="calc-value">500,000원</span></div>
           <div class="calc-row"><span class="calc-label">변경일</span><span class="calc-value">15일</span></div>
           <div class="calc-row calc-total"><span class="calc-label">이번 달 추가 납부</span><span class="calc-value">+16,667원</span></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-item">
-          <div class="card-title">수납 화면에 자동 반영</div>
-          <div class="card-desc">방 변경 후 해당 입주민의 수납 화면에 차액 항목이 자동으로 추가됩니다.</div>
+
+      <div class="screen-grid">
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#3F6B55" stroke-width="1.4"/><path d="M5 9h8M9 7v4" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">수납 화면에 자동 반영</div>
+            <div class="screen-card-desc">방 변경 후 해당 입주민의 수납 화면에 차액 항목이 자동으로 추가됩니다.</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">입주민 앱에도 안내</div>
-          <div class="card-desc">입주민 앱에도 방 변경으로 인한 추가 납부 안내가 표시됩니다.</div>
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M9 3a4 4 0 0 1 4 4c0 2 .8 3 1.2 3.5H3.8C4.2 10 5 9 5 7a4 4 0 0 1 4-4Z" stroke="#3F6B55" stroke-width="1.4"/><path d="M7 13a2 2 0 0 0 4 0" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">입주민 앱에도 안내</div>
+            <div class="screen-card-desc">입주민 앱에도 방 변경으로 인한 추가 납부 안내가 표시됩니다.</div>
+          </div>
         </div>
       </div>
       <div class="bottom-space"></div>
@@ -368,45 +623,84 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
   </div>
 </div>
 
+<!-- ══════════════════════════════════════ -->
 <!-- 베이직 플랜 -->
+<!-- ══════════════════════════════════════ -->
 <div class="plan-page" id="plan-basic">
-  <div class="sub-tabs" id="subtabs-basic">
-    <button class="sub-tab active" onclick="selectSub('basic','overview',this)">개요</button>
-    <button class="sub-tab" onclick="selectSub('basic','manual',this)">수동 처리</button>
-    <button class="sub-tab" onclick="selectSub('basic','notice',this)">미납 알림</button>
+  <div class="sub-tabs-wrap">
+    <div class="sub-tabs" id="subtabs-basic">
+      <button class="sub-tab active" onclick="selectSub('basic','overview',this)">개요</button>
+      <button class="sub-tab" onclick="selectSub('basic','manual',this)">수동 처리</button>
+      <button class="sub-tab" onclick="selectSub('basic','notice',this)">미납 알림</button>
+    </div>
   </div>
 
+  <!-- 개요 -->
   <div class="sub-page active" id="basic-overview">
     <div class="section">
-      <div class="highlight">
-        <div class="highlight-title">베이직 플랜 수납 기능</div>
-        <div class="highlight-item">입주민별 납부 상태 확인 (미납 · 완납 · 부분납)</div>
-        <div class="highlight-item">완납 및 부분납 수동 처리</div>
-        <div class="highlight-item">미납 독촉 알림 수동 발송</div>
-        <div class="highlight-item">월별 수납 현황 조회</div>
-      </div>
-      <div class="notice">
-        <div class="notice-title">자동 수납은 프로 플랜 전용입니다</div>
-        <div class="notice-desc">베이직 플랜에서는 입금 확인 후 직접 완납 처리를 해야 합니다. 프로 플랜으로 업그레이드하면 입금 즉시 자동으로 처리됩니다.</div>
-      </div>
-      <div class="sec-label">수납 화면 구성</div>
-      <div class="card">
-        <div class="card-item">
-          <div class="card-title">월별 수납 현황 카드</div>
-          <div class="card-desc">상단 카드에서 이번 달 완납 · 미납 · 부분납 인원을 확인할 수 있습니다. 좌우 스와이프로 다른 달을 조회할 수 있어요.</div>
+      <div style="height:20px"></div>
+      <div class="plan-hero" style="background:linear-gradient(135deg,#3d3d3d 0%,#1c1c1e 100%)">
+        <div class="plan-hero-badge" style="background:rgba(255,255,255,.12)">BASIC</div>
+        <h2>수납 현황을 간편하게<br>관리할 수 있어요</h2>
+        <p>입금 확인 후 직접 수납을 처리하는 방식입니다. 입주민별 납부 상태를 한눈에 볼 수 있어요.</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">입주민별 납부 상태 확인 (미납·완납·부분납)</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">완납 및 부분납 수동 처리</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">미납 독촉 알림 수동 발송</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check"><svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8.5L9 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feature-text">월별 수납 현황 조회</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">입주민 목록</div>
-          <div class="card-desc">전체 · 미납 · 완납 · 부분납 필터로 입주민별 납부 상태를 확인하고 상세 처리를 할 수 있습니다.</div>
+      </div>
+
+      <div class="upgrade-banner">
+        <div class="upgrade-text">
+          <strong>자동 수납은 프로 플랜 전용</strong>
+          <span>입금 감지부터 완납 처리까지 모두 자동으로</span>
+        </div>
+        <button class="upgrade-btn" onclick="selectPlan('pro', document.querySelectorAll('.plan-tab')[0])">프로 보기</button>
+      </div>
+
+      <div class="sec-label">수납 화면 구성</div>
+      <div class="screen-grid">
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#3F6B55" stroke-width="1.4"/><path d="M5 8h8M5 11h5" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">월별 수납 현황 카드</div>
+            <div class="screen-card-desc">이번 달 완납·미납·부분납 인원을 확인할 수 있습니다. 좌우 스와이프로 다른 달을 조회할 수 있어요.</div>
+          </div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h8" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">입주민 목록</div>
+            <div class="screen-card-desc">전체·미납·완납·부분납 필터로 납부 상태를 빠르게 확인하고 개별 처리를 할 수 있습니다.</div>
+          </div>
         </div>
       </div>
       <div class="bottom-space"></div>
     </div>
   </div>
 
+  <!-- 수동 처리 -->
   <div class="sub-page" id="basic-manual">
     <div class="section">
-      <div class="sec-label">완납 처리하기</div>
+      <div style="height:20px"></div>
+      <div class="group-title">완납 처리</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
@@ -418,12 +712,13 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
         <div class="step-item">
           <div class="step-num">2</div>
           <div>
-            <div class="step-title">완납 처리</div>
+            <div class="step-title">완납 처리 버튼 탭</div>
             <div class="step-desc">상세 화면에서 완납 처리 버튼을 탭합니다. 완납 날짜가 자동으로 기록됩니다.</div>
           </div>
         </div>
       </div>
-      <div class="sec-label">부분납 처리하기</div>
+
+      <div class="group-title">부분납 처리</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
@@ -440,42 +735,64 @@ body{font-family:'Pretendard',sans-serif;background:#f5f5f7;color:#1c1c1e;line-h
           </div>
         </div>
       </div>
-      <div class="notice">
-        <div class="notice-title">잘못 처리했다면</div>
-        <div class="notice-desc">입주민 상세 화면에서 수납 취소를 통해 되돌릴 수 있습니다.</div>
+
+      <div class="info-card">
+        <div class="info-card-title">잘못 처리했다면</div>
+        <div class="info-card-desc">입주민 상세 화면에서 <strong>수납 취소</strong>를 통해 이전 상태로 되돌릴 수 있습니다.</div>
       </div>
       <div class="bottom-space"></div>
     </div>
   </div>
 
+  <!-- 미납 알림 -->
   <div class="sub-page" id="basic-notice">
     <div class="section">
-      <div class="sec-label">수동 독촉 알림 보내기</div>
+      <div style="height:20px"></div>
+      <div class="group-title">수동 독촉 알림 보내기</div>
       <div class="step-list">
         <div class="step-item">
           <div class="step-num">1</div>
           <div>
-            <div class="step-title">입주민 상세 화면으로 이동</div>
+            <div class="step-title">미납 입주민 상세 화면으로 이동</div>
             <div class="step-desc">수납 화면 하단 목록에서 미납 입주민을 탭합니다.</div>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">2</div>
           <div>
-            <div class="step-title">독촉 알림 전송</div>
+            <div class="step-title">독촉 알림 즉시 전송</div>
             <div class="step-desc">상세 화면에서 독촉 알림 버튼을 탭하면 즉시 해당 입주민 앱으로 미납 알림이 발송됩니다.</div>
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-item">
-          <div class="card-title">알림 내용</div>
-          <div class="card-desc">입주민 앱으로 미납 알림이 발송됩니다. 미납 경과 일수와 납부 금액이 함께 표시됩니다.</div>
+
+      <div class="screen-grid">
+        <div class="screen-card">
+          <div class="screen-card-icon">
+            <svg viewBox="0 0 18 18" fill="none"><path d="M9 3a4 4 0 0 1 4 4c0 2 .8 3 1.2 3.5H3.8C4.2 10 5 9 5 7a4 4 0 0 1 4-4Z" stroke="#3F6B55" stroke-width="1.4"/><path d="M7 13a2 2 0 0 0 4 0" stroke="#3F6B55" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title">알림 내용</div>
+            <div class="screen-card-desc">입주민 앱으로 미납 알림이 발송됩니다. 미납 경과 일수와 납부 금액이 함께 표시됩니다.</div>
+          </div>
         </div>
-        <div class="card-item">
-          <div class="card-title">자동 독촉 알림은 프로 전용</div>
-          <div class="card-desc">지정한 날짜에 자동으로 독촉 알림을 보내는 기능은 프로 플랜에서만 사용할 수 있습니다.</div>
+        <div class="screen-card" style="background:#f5f5f7">
+          <div class="screen-card-icon" style="background:#e5e5ea">
+            <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6" stroke="#8e8e93" stroke-width="1.4"/><path d="M9 6v3l2 1.5" stroke="#8e8e93" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="screen-card-title" style="color:var(--text-sub)">자동 독촉은 프로 전용</div>
+            <div class="screen-card-desc">지정일에 자동 발송되는 독촉 알림은 프로 플랜에서만 사용할 수 있습니다.</div>
+          </div>
         </div>
+      </div>
+
+      <div class="upgrade-banner">
+        <div class="upgrade-text">
+          <strong>자동 독촉 알림 사용하기</strong>
+          <span>프로 플랜으로 업그레이드하면 자동으로 발송됩니다</span>
+        </div>
+        <button class="upgrade-btn" onclick="selectPlan('pro', document.querySelectorAll('.plan-tab')[0])">프로 보기</button>
       </div>
       <div class="bottom-space"></div>
     </div>
