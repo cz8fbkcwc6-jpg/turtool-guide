@@ -13,6 +13,7 @@
   --text-hint:#8e8e93;--border:#e5e5ea;--border-light:#f5f5f7;
   --red:#e11d48;--red-light:#fff1f2;
   --orange:#f59e0b;--orange-light:#fff7ed;
+  --blue:#3b82f6;--blue-light:#eff6ff;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;max-width:480px;margin:0 auto;min-height:100vh}
@@ -42,22 +43,36 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
 .notice-card{border-radius:14px;padding:16px 18px;margin-bottom:16px}
 .notice-card.orange{background:var(--orange-light);border-left:3px solid var(--orange)}
 .notice-card.green{background:var(--green-light);border-left:3px solid var(--green)}
+.notice-card.blue{background:var(--blue-light);border-left:3px solid var(--blue)}
 .notice-title{font-size:14px;font-weight:700;margin-bottom:8px}
 .notice-card.orange .notice-title{color:#92400e}
 .notice-card.green .notice-title{color:#065f46}
+.notice-card.blue .notice-title{color:#1d4ed8}
 .notice-list{display:flex;flex-direction:column;gap:6px}
 .notice-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.6}
 .notice-card.orange .notice-item{color:#78350f}
 .notice-card.green .notice-item{color:#047857}
+.notice-card.blue .notice-item{color:#1e40af}
 .notice-item-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:7px}
 .notice-card.orange .notice-item-dot{background:var(--orange)}
 .notice-card.green .notice-item-dot{background:var(--green)}
+.notice-card.blue .notice-item-dot{background:var(--blue)}
 .section-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px}
 .step-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .step-item{background:var(--white);border-radius:14px;padding:14px 16px;display:flex;align-items:flex-start;gap:14px}
 .step-num{width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .step-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
 .step-desc{font-size:13px;color:var(--text-sub);line-height:1.55}
+.timeline{display:flex;flex-direction:column;gap:0;margin-bottom:16px}
+.timeline-item{display:flex;align-items:flex-start;gap:14px;position:relative}
+.timeline-item:not(:last-child)::after{content:'';position:absolute;left:13px;top:28px;bottom:-8px;width:2px;background:var(--border)}
+.timeline-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:800;color:#fff;z-index:1}
+.timeline-dot.green{background:var(--green)}
+.timeline-dot.orange{background:var(--orange)}
+.timeline-dot.red{background:var(--red)}
+.timeline-body{background:var(--white);border-radius:14px;padding:14px 16px;flex:1;margin-bottom:8px}
+.timeline-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
+.timeline-desc{font-size:13px;color:var(--text-sub);line-height:1.55}
 .refund-notice{background:var(--green-light);border-radius:14px;padding:16px 18px;margin-bottom:16px;border-left:3px solid var(--green)}
 .refund-notice p{font-size:13px;color:#065f46;line-height:1.7}
 .divider{height:1px;background:var(--border-light);margin:20px 0}
@@ -92,7 +107,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
   <div class="hero">
     <div class="hero-label">Account Deletion</div>
     <h1>계정 삭제 안내</h1>
-    <p>입주민은 앱에서 즉시 삭제되며, 원장은 해지 신청 후 해당 월 말일에 처리됩니다. 삭제된 데이터는 복구할 수 없습니다.</p>
+    <p>입주민은 앱에서 즉시 삭제되며, 원장은 해지 신청 후 해당 월 말일에 앱이 잠기고 10일 후 데이터가 삭제됩니다.</p>
   </div>
   <div class="section-wrap">
     <div class="danger-card">
@@ -115,14 +130,50 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
     <!-- 원장 탭 -->
     <div class="tab-content active" id="tab-owner">
       <div class="notice-card orange">
-        <div class="notice-title">원장 계정 삭제는 신청 후 말일에 처리됩니다</div>
+        <div class="notice-title">원장 계정 해지 후 10일 유예기간이 있어요</div>
         <div class="notice-list">
           <div class="notice-item"><div class="notice-item-dot"></div><div>해지 신청 후 해당 월 말일까지는 서비스를 계속 이용할 수 있습니다</div></div>
-          <div class="notice-item"><div class="notice-item-dot"></div><div>말일 이후 계정과 모든 데이터가 완전히 삭제됩니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>말일 이후 앱이 잠기며, 10일간 로그인 후 재결제로 복구할 수 있습니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>10일이 지나면 계정과 모든 데이터가 완전히 삭제됩니다</div></div>
           <div class="notice-item"><div class="notice-item-dot"></div><div>삭제 처리 완료 후 문자(SMS)로 안내됩니다</div></div>
-          <div class="notice-item"><div class="notice-item-dot"></div><div>해지 신청 후에도 앱 설정에서 신청을 취소할 수 있습니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>말일 전까지 앱 설정에서 해지를 취소할 수 있습니다</div></div>
         </div>
       </div>
+
+      <div class="section-label">해지 후 타임라인</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot green">신청</div>
+          <div class="timeline-body">
+            <div class="timeline-title">해지 신청 완료</div>
+            <div class="timeline-desc">해당 월 말일까지 서비스 정상 이용 가능. 앱 설정에서 언제든 취소 가능.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot orange">말일</div>
+          <div class="timeline-body">
+            <div class="timeline-title">앱 잠금 + 유예기간 시작</div>
+            <div class="timeline-desc">앱 사용이 중단되고 10일간 유예기간이 시작됩니다. 로그인 후 재결제 시 기존 데이터 유지하며 복구 가능.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot red">+10일</div>
+          <div class="timeline-body">
+            <div class="timeline-title">데이터 완전 삭제</div>
+            <div class="timeline-desc">계정과 모든 데이터가 영구 삭제됩니다. 이후 같은 번호로 재가입 가능하나 무료체험은 적용되지 않습니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-card blue">
+        <div class="notice-title">유예기간 중 복구하려면</div>
+        <div class="notice-list">
+          <div class="notice-item"><div class="notice-item-dot"></div><div>기존 로그인 정보로 앱에 로그인합니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>플랜 선택 화면에서 구독을 다시 시작합니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>결제 완료 시 기존 데이터가 유지된 채로 서비스가 복구됩니다</div></div>
+        </div>
+      </div>
+
       <div class="section-label">해지 신청 방법</div>
       <div class="step-list">
         <div class="step-item">
@@ -135,7 +186,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
         </div>
         <div class="step-item">
           <div class="step-num">3</div>
-          <div><div class="step-title">해지 신청 완료</div><div class="step-desc">신청이 완료되면 해당 월 말일까지 서비스를 이용할 수 있으며, 이후 계정과 데이터가 삭제됩니다. 말일 전까지 앱 설정에서 신청을 취소할 수 있습니다.</div></div>
+          <div><div class="step-title">해지 신청 완료</div><div class="step-desc">신청이 완료되면 해당 월 말일까지 서비스를 이용할 수 있으며, 말일 전까지 취소 버튼으로 취소할 수 있습니다.</div></div>
         </div>
       </div>
       <div class="refund-notice">
