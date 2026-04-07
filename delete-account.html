@@ -107,7 +107,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
   <div class="hero">
     <div class="hero-label">Account Deletion</div>
     <h1>계정 삭제 안내</h1>
-    <p>입주민은 앱에서 즉시 삭제되며, 원장은 해지 신청 후 해당 월 말일에 앱이 잠기고 10일 후 데이터가 삭제됩니다.</p>
+    <p>입주민은 앱에서 즉시 삭제되며, 원장은 결제 필요 상태가 시작된 뒤 유예기간이 지나면 데이터가 삭제됩니다.</p>
   </div>
   <div class="section-wrap">
     <div class="danger-card">
@@ -130,37 +130,37 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
     <!-- 원장 탭 -->
     <div class="tab-content active" id="tab-owner">
       <div class="notice-card orange">
-        <div class="notice-title">원장 계정 해지 후 10일 유예기간이 있어요</div>
+        <div class="notice-title">원장 계정은 결제 필요 시작 후 10일 유예기간이 있어요</div>
         <div class="notice-list">
-          <div class="notice-item"><div class="notice-item-dot"></div><div>해지 신청 후 해당 월 말일까지는 서비스를 계속 이용할 수 있습니다</div></div>
-          <div class="notice-item"><div class="notice-item-dot"></div><div>말일 이후 앱이 잠기며, 10일간 로그인 후 재결제로 복구할 수 있습니다</div></div>
-          <div class="notice-item"><div class="notice-item-dot"></div><div>10일이 지나면 계정과 모든 데이터가 완전히 삭제됩니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>결제 필요 상태가 시작된 이후에도 10일간 유예기간이 제공됩니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>유예기간 내라면 로그인 후 재결제를 진행하면 기존 데이터를 유지한 채 복구할 수 있습니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>유예기간이 지나면 계정과 모든 데이터가 완전히 삭제됩니다</div></div>
           <div class="notice-item"><div class="notice-item-dot"></div><div>삭제 처리 완료 후 문자(SMS)로 안내됩니다</div></div>
-          <div class="notice-item"><div class="notice-item-dot"></div><div>말일 전까지 앱 설정에서 해지를 취소할 수 있습니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>동일한 전화번호로 재가입하는 경우 무료체험은 다시 적용되지 않습니다</div></div>
         </div>
       </div>
 
-      <div class="section-label">해지 후 타임라인</div>
+      <div class="section-label">원장 계정 삭제 타임라인</div>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-dot green">신청</div>
+          <div class="timeline-dot green">시작</div>
           <div class="timeline-body">
-            <div class="timeline-title">해지 신청 완료</div>
-            <div class="timeline-desc">해당 월 말일까지 서비스 정상 이용 가능. 앱 설정에서 언제든 취소 가능.</div>
+            <div class="timeline-title">결제 필요 상태 시작</div>
+            <div class="timeline-desc">무료체험 종료, 해지 신청, 또는 재가입 상태에 따라 결제가 필요한 시점이 시작됩니다. 해지 신청의 경우 말일 전까지 앱 설정에서 취소할 수 있습니다.</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-dot orange">말일</div>
+          <div class="timeline-dot orange">유예</div>
           <div class="timeline-body">
-            <div class="timeline-title">앱 잠금 + 유예기간 시작</div>
-            <div class="timeline-desc">앱 사용이 중단되고 10일간 유예기간이 시작됩니다. 로그인 후 재결제 시 기존 데이터 유지하며 복구 가능.</div>
+            <div class="timeline-title">10일 유예기간</div>
+            <div class="timeline-desc">앱 사용이 제한될 수 있으며, 이 기간 안에 로그인 후 결제를 진행하면 기존 데이터가 유지된 채 복구됩니다.</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-dot red">+10일</div>
+          <div class="timeline-dot red">삭제</div>
           <div class="timeline-body">
             <div class="timeline-title">데이터 완전 삭제</div>
-            <div class="timeline-desc">계정과 모든 데이터가 영구 삭제됩니다. 이후 같은 번호로 재가입 가능하나 무료체험은 적용되지 않습니다.</div>
+            <div class="timeline-desc">유예기간이 지나면 계정과 모든 데이터가 영구 삭제됩니다. 이후 같은 번호로 재가입은 가능하지만 무료체험은 다시 제공되지 않습니다.</div>
           </div>
         </div>
       </div>
@@ -168,9 +168,10 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
       <div class="notice-card blue">
         <div class="notice-title">유예기간 중 복구하려면</div>
         <div class="notice-list">
-          <div class="notice-item"><div class="notice-item-dot"></div><div>기존 로그인 정보로 앱에 로그인합니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>유예기간 내라면 기존 로그인 정보로 앱에 로그인합니다</div></div>
           <div class="notice-item"><div class="notice-item-dot"></div><div>플랜 선택 화면에서 구독을 다시 시작합니다</div></div>
-          <div class="notice-item"><div class="notice-item-dot"></div><div>결제 완료 시 기존 데이터가 유지된 채로 서비스가 복구됩니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>결제 완료 시 기존 데이터가 유지된 채 서비스가 복구됩니다</div></div>
+          <div class="notice-item"><div class="notice-item-dot"></div><div>유예기간이 지난 뒤에는 기존 데이터 복구가 불가능합니다</div></div>
         </div>
       </div>
 
@@ -190,7 +191,7 @@ body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);
         </div>
       </div>
       <div class="refund-notice">
-        <p>결제 즉시 서비스가 시작되며, 이용 특성상 환불이 불가합니다.<br>해지 신청 시 정기 결제는 자동으로 중단됩니다.</p>
+        <p>결제 후 즉시 서비스가 제공되므로 단순 변심에 의한 환불은 어려울 수 있습니다.<br>시스템 오류 또는 서비스상 중대한 문제가 확인되는 경우 개별 검토 후 처리될 수 있습니다.<br>해지 신청 시 정기 결제는 자동으로 중단됩니다.</p>
       </div>
     </div>
     <!-- 입주민 탭 -->
